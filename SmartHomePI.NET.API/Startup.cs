@@ -28,7 +28,10 @@ namespace SmartHomePI.NET.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(context => context.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddControllers();
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +45,8 @@ namespace SmartHomePI.NET.API
             // app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x=>x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseAuthorization();
 

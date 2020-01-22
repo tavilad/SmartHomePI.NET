@@ -14,18 +14,19 @@ namespace SmartHomePI.NET.API.Data
             this._context = context;
 
         }
+
         public async Task<User> Login(string username, string password)
         {
-            User user = await this._context.Users.FirstOrDefaultAsync(x=>
-                x.Username==username
+            User user = await this._context.Users.FirstOrDefaultAsync(x =>
+                x.Username == username
             );
 
-            if(user == null)
+            if (user == null)
             {
                 return null;
             }
-            
-            if(!VerifyPassword(password,user.PasswordHash,user.PasswordSalt))
+
+            if (!VerifyPassword(password, user.PasswordHash, user.PasswordSalt))
             {
                 return null;
             }
@@ -38,9 +39,9 @@ namespace SmartHomePI.NET.API.Data
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
             {
                 byte[] computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                for(int i=0;i<computedHash.Length;i++)
+                for (int i = 0; i < computedHash.Length; i++)
                 {
-                    if(computedHash[i]!=passwordHash[i])
+                    if (computedHash[i] != passwordHash[i])
                     {
                         return false;
                     }
@@ -75,7 +76,7 @@ namespace SmartHomePI.NET.API.Data
 
         public async Task<bool> UserExists(string username)
         {
-            if(await this._context.Users.AnyAsync(x=>x.Username==username))
+            if (await this._context.Users.AnyAsync(x => x.Username == username))
             {
                 return true;
             }

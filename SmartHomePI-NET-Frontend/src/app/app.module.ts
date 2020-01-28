@@ -16,6 +16,8 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
 import { TemperatureComponent } from './temperature/temperature.component';
 import { CameraComponent } from './camera/camera.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
    declarations: [
@@ -24,7 +26,9 @@ import { CameraComponent } from './camera/camera.component';
       HomeComponent,
       RegisterComponent,
       TemperatureComponent,
-      CameraComponent
+      CameraComponent,
+      SettingsComponent,
+      ProfileComponent
    ],
    imports: [
       BrowserModule,

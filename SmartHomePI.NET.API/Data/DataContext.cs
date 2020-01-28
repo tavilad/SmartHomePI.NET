@@ -10,5 +10,7 @@ namespace SmartHomePI.NET.API.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<UserDetails> UserDetails { get; set; }
+        public DbSet<Room> Rooms { get; set; }
     }
 }

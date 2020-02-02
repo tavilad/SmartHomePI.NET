@@ -18,6 +18,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using SmartHomePI.NET.API.Data;
+using SmartHomePI.NET.API.Data.Interfaces;
 using SmartHomePI.NET.API.Helpers;
 
 namespace SmartHomePI.NET.API
@@ -41,6 +42,10 @@ namespace SmartHomePI.NET.API
             services.AddCors();
 
             services.AddScoped<IAuthRepository, AuthRepository>();
+
+            services.AddScoped<IRoomRepository, RoomRepository>();
+
+            services.AddScoped<IUserDetailsRepository, UserDetailsRepository>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {

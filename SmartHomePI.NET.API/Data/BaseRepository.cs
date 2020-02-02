@@ -16,12 +16,12 @@ namespace SmartHomePI.NET.API.Data
             this._context = context;
         }
 
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
-            Delete(await GetByID(id));
+            await Delete(await GetByID(id));
         }
 
-        public async void Delete(T entity)
+        public async Task Delete(T entity)
         {
             var dbSet = this._context.Set<T>();
 
@@ -61,21 +61,15 @@ namespace SmartHomePI.NET.API.Data
                 return await query.ToListAsync();
             }
         }
-
-        public async Task<T> GetByID(int id)
-        {
-            var dbSet = this._context.Set<T>();
-            return await dbSet.FindAsync(id);
-        }
-
-        public async void Insert(T entity)
+        
+        public async Task Insert(T entity)
         {
             var dbSet = this._context.Set<T>();
             await dbSet.AddAsync(entity);
             await this._context.SaveChangesAsync();
         }
 
-        public async void Update(T item)
+        public async Task Update(T item)
         {
             var dbSet = this._context.Set<T>();
             dbSet.Attach(item);

@@ -11,7 +11,6 @@ namespace SmartHomePI.NET.API.Controllers
     {
         private const int PIN = 4;
         
-        [AllowAnonymous]
         [HttpGet]
         private IActionResult GetTemperature()
         {

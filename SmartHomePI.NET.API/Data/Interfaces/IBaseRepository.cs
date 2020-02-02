@@ -8,15 +8,13 @@ namespace SmartHomePI.NET.API.Data
 {
     public interface IBaseRepository<T>
     {
-        void Insert(T entity);
+        Task Insert(T entity);
 
-        void Update(T item);
+        Task Update(T item);
 
-        void Delete(int id);
+        Task Delete(int id);
 
-        void Delete(T entity);
-
-        Task<T> GetByID(int id);
+        Task Delete(T entity);
 
         Task<IEnumerable<T>> Get(
             Expression<Func<T, bool>> filter = null,

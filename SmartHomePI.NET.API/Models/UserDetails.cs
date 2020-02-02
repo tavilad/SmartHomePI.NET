@@ -6,6 +6,7 @@ namespace SmartHomePI.NET.API.Models
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public User user { get; set; }
+        public virtual User user { get; set; }
+        public int UserId { get; set; }
     }
 }

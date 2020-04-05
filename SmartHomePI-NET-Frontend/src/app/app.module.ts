@@ -18,6 +18,7 @@ import { TemperatureComponent } from './temperature/temperature.component';
 import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ProfileComponent } from './profile/profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
    declarations: [
@@ -28,7 +29,8 @@ import { ProfileComponent } from './profile/profile.component';
       TemperatureComponent,
       CameraComponent,
       SettingsComponent,
-      ProfileComponent
+      ProfileComponent,
+      DashboardComponent
    ],
    imports: [
       BrowserModule,

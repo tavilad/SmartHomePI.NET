@@ -5,6 +5,7 @@ import { CameraComponent } from './camera/camera.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { SettingsComponent } from './settings/settings.component';
 import { ProfileComponent } from './profile/profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -17,6 +18,7 @@ export const appRoutes: Routes = [
             {path: 'camera', component: CameraComponent},
             {path: 'settings', component: SettingsComponent},
             {path: 'profile', component: ProfileComponent},
+            {path: 'dashboard', component: DashboardComponent}
         ]
     },
     {path: '**', redirectTo: '', pathMatch: 'full'},

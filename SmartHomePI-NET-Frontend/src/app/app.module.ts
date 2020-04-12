@@ -6,6 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -19,6 +24,7 @@ import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FormFieldAppearanceExampleComponent } from './FormFieldAppearanceExample/FormFieldAppearanceExample.component';
 
 @NgModule({
    declarations: [
@@ -30,7 +36,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
       CameraComponent,
       SettingsComponent,
       ProfileComponent,
-      DashboardComponent
+      DashboardComponent,
+      FormFieldAppearanceExampleComponent
    ],
    imports: [
       BrowserModule,
@@ -38,7 +45,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
       FormsModule,
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      MatInputModule,
+      MatTableModule,
+      MatPaginatorModule,
+      MatSortModule,
+      MatIconModule
    ],
    providers: [
       AuthService,

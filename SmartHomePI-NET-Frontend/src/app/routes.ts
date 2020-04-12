@@ -6,6 +6,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { SettingsComponent } from './settings/settings.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FormFieldAppearanceExampleComponent } from './FormFieldAppearanceExample/FormFieldAppearanceExample.component';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -18,7 +19,8 @@ export const appRoutes: Routes = [
             {path: 'camera', component: CameraComponent},
             {path: 'settings', component: SettingsComponent},
             {path: 'profile', component: ProfileComponent},
-            {path: 'dashboard', component: DashboardComponent}
+            {path: 'dashboard', component: DashboardComponent},
+            {path: 'example', component: FormFieldAppearanceExampleComponent}
         ]
     },
     {path: '**', redirectTo: '', pathMatch: 'full'},

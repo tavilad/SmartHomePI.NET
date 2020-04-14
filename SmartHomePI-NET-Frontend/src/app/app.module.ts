@@ -11,6 +11,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -50,7 +53,10 @@ import { FormFieldAppearanceExampleComponent } from './FormFieldAppearanceExampl
       MatTableModule,
       MatPaginatorModule,
       MatSortModule,
-      MatIconModule
+      MatIconModule,
+      MatFormFieldModule,
+      MatButtonModule,
+      MatMenuModule
    ],
    providers: [
       AuthService,
@@ -59,6 +65,6 @@ import { FormFieldAppearanceExampleComponent } from './FormFieldAppearanceExampl
    ],
    bootstrap: [
       AppComponent
-   ]
+   ],
 })
 export class AppModule {}

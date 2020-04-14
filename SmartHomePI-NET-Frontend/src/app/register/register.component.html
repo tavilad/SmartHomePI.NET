@@ -2,17 +2,23 @@
   <h2 class="text-center text-primary">Sign Up</h2>
   <hr>
 
-  <div class="form-group">
-    <input type="text" class="form-control" required name="username" [(ngModel)]="model.username" placeholder="Username">
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput name="username" [(ngModel)]="model.username" placeholder="Username">
+    </mat-form-field> 
   </div>
 
-  <div class="form-group">
-    <input type="password" class="form-control" required name="password" [(ngModel)]="model.password" placeholder="Password">
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" name="password" [(ngModel)]="model.password" placeholder="Password">
+    </mat-form-field>
   </div>
 
-  <div class="form-group text-center">
-    <button class="btn btn-success mr-2" type="submit">Register</button>
-    <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+  <div>
+    <button mat-raised-button color="primary" type="submit">Register</button>
+    <button mat-raised-button type="button" (click)="cancel()">Cancel</button>
   </div>
   
 </form>

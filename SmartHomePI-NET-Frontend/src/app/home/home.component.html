@@ -1,16 +1,16 @@
-<div class="container mt-5">
+<div>
   <div *ngIf="!registerMode" style="text-align: center">
     <h1>SmartHomePI.NET</h1>
     <p class="lead">Get real time data from your home.</p>
     <div class="text-center">
-      <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Register</button>
-      <button class="btn btn-info btn-lg">Learn more</button>
+      <button mat-raised-button color="primary" (click)="registerToggle()">Register</button>
+      <button mat-raised-button>Learn more</button>
     </div>
   </div>
 
-  <div *ngIf="registerMode" class="container">
-    <div class="row justify-content-center">
-      <div class="col-4">
+  <div *ngIf="registerMode">
+    <div class="text-center">
+      <div class="text-center">
         <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
       </div>
     </div>

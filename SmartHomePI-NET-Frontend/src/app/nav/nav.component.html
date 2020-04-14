@@ -13,25 +13,43 @@
     </ul>
 
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
-      <a class="dropdown-toggle text-light" dropdownToggle>
-        Welcome {{authService.decodedToken?.unique_name | titlecase}}
-      </a>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <span class="text-white">
+          Welcome {{authService.decodedToken?.unique_name | titlecase}}
+        </span>
+      </button>
 
-      <div class="dropdown-menu mt-4" *dropdownMenu>
-        <a class="dropdown-item" [routerLink]="['/profile']"><i class="fa fa-user mr-1"></i>Edit Profile</a>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/profile']">
+          Edit Profile
+        </button>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" [routerLink]="['/settings']"><i class="fas fa-users-cog"></i>Settings</a>
+        <button mat-menu-item [routerLink]="['/settings']">
+          Settings
+        </button>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" (click)="logOut()"><i class="fa fa-sign-out mr-1"></i>Logout</a>
-      </div>
+        <button mat-menu-item (click)="logOut()">
+          Logout
+        </button>
+      </mat-menu>
     </div>
 
-    <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
-      <input class="form-control mr-sm-2" type="text" name="username" placeholder="Username" required
-        [(ngModel)]="model.username">
-      <input class="form-control mr-sm-2" type="password" name="password" placeholder="Password" required
-        [(ngModel)]="model.password">
-      <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+    <form *ngIf="!loggedIn()" #loginForm="ngForm" (ngSubmit)="login()">
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" name="username" placeholder="Username" required
+               [(ngModel)]="model.username">
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" name="password" placeholder="Password" required
+               [(ngModel)]="model.password">
+      </mat-form-field>
+      <button [disabled]="!loginForm.valid" mat-raised-button type="submit">
+        <span class="text-white">
+          Login
+        </span>
+      </button>
     </form>
   </div>
 </nav>

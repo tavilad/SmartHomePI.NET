@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './_services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { fadeInAnimation } from '../app/_animations/index';
 
 @Component({
   selector: 'app-root',

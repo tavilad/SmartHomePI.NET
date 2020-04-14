@@ -17,16 +17,6 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
 
-  login() {
-    this.authService.login(this.model).subscribe(next => {
-      this.alertify.success('Logged in successfuly');
-    }, error => {
-      this.alertify.error('Failed to login');
-    }, () => {
-      this.router.navigate(['/camera']);
-    });
-  }
-
   loggedIn() {
     return this.authService.loggedIn();
   }

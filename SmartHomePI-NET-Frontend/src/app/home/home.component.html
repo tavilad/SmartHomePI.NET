@@ -1,9 +1,10 @@
 <div>
-  <div *ngIf="!registerMode" style="text-align: center">
+  <div *ngIf="!registerMode && !loginMode" style="text-align: center">
     <h1>SmartHomePI.NET</h1>
     <p class="lead">Get real time data from your home.</p>
     <div class="text-center">
-      <button mat-raised-button color="primary" (click)="registerToggle()">Register</button>
+      <button mat-raised-button color="primary" (click)="loginToggle()" class="mr-2">Login</button>
+      <button mat-raised-button color="primary" (click)="registerToggle()" class="mr-2">Register</button>
       <button mat-raised-button>Learn more</button>
     </div>
   </div>
@@ -13,6 +14,12 @@
       <div class="text-center">
         <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
       </div>
+    </div>
+  </div>
+
+  <div *ngIf="loginMode">
+    <div class="text-center">
+      <app-login (cancelLogin)="cancelLoginMode($event)"></app-login>
     </div>
   </div>
 </div>

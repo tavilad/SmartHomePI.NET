@@ -1,0 +1,26 @@
+<form *ngIf="!loggedIn()" #loginForm="ngForm" (ngSubmit)="login()">
+    <h2 class="text-center text-primary">Login</h2>
+    <hr>
+    <div>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" name="username" placeholder="Username" required
+                   [(ngModel)]="model.username">
+          </mat-form-field>
+    </div>
+    
+    <div>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" name="password" placeholder="Password" required
+                   [(ngModel)]="model.password">
+          </mat-form-field>
+    </div>
+
+    <div>
+        <button color="primary" [disabled]="!loginForm.valid" mat-raised-button type="submit" class="mr-2">
+            Login
+        </button>
+        <button mat-raised-button type="button" (click)="cancel()">Cancel</button>
+    </div>
+</form>

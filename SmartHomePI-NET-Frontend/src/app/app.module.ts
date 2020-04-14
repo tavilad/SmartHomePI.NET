@@ -28,6 +28,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormFieldAppearanceExampleComponent } from './FormFieldAppearanceExample/FormFieldAppearanceExample.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
    declarations: [
@@ -40,7 +41,8 @@ import { FormFieldAppearanceExampleComponent } from './FormFieldAppearanceExampl
       SettingsComponent,
       ProfileComponent,
       DashboardComponent,
-      FormFieldAppearanceExampleComponent
+      FormFieldAppearanceExampleComponent,
+      LoginComponent
    ],
    imports: [
       BrowserModule,

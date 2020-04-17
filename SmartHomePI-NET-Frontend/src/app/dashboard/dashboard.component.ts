@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AlertifyService } from '../_services/alertify.service';
-import { RoomService } from '../_services/room.service';
+import { CrudService } from '../_services/CRUD.service';
 import { AuthService } from '../_services/auth.service';
 
 export interface Tile {
@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
   model: any = {};
 
   constructor(public dialog: MatDialog, private alertify: AlertifyService,
-              private roomService: RoomService, private authService: AuthService) { }
+              private crudService: CrudService, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
         this.model.userId = parseInt(this.authService.decodedToken.nameid);
         this.model.roomName = result;
         console.log(this.model);
-        this.roomService.createRoom(this.model).subscribe(() => {
+        this.crudService.create(this.model, 'room').subscribe(() => {
           this.alertify.success('Created room ' + this.model.roomName);
         }, error => {
           this.alertify.error(error);

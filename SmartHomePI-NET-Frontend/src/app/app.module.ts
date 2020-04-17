@@ -33,7 +33,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent, DialogComponent } from './dashboard/dashboard.component';
 import { FormFieldAppearanceExampleComponent } from './FormFieldAppearanceExample/FormFieldAppearanceExample.component';
 import { LoginComponent } from './login/login.component';
-import { RoomService } from './_services/room.service';
+import { CrudService } from './_services/CRUD.service';
 
 @NgModule({
    declarations: [
@@ -73,7 +73,7 @@ import { RoomService } from './_services/room.service';
       AuthService,
       ErrorInterceptorProvider,
       AlertifyService,
-      RoomService
+      CrudService
    ],
    bootstrap: [
       AppComponent

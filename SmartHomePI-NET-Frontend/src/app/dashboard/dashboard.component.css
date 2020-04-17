@@ -1,0 +1,61 @@
+.mat-grid-tile:hover {
+    border-radius: 25px;
+    border: 2px solid purple;
+    padding: 20px; 
+    width: 200px;
+    height: 150px;
+    animation: fadeIn ease 10s;
+    -webkit-animation: fadeIn ease 1s;
+    -moz-animation: fadeIn ease 1s;
+    -o-animation: fadeIn ease 1s;
+    -ms-animation: fadeIn ease 1s;
+}
+
+body, html{
+  height:100%;
+}
+
+@keyframes fadeIn {
+  0% {
+    border: 2px solid white;
+  }
+  100% {
+    border: 2px solid purple;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    border: 2px solid white;
+  }
+  100% {
+    border: 2px solid purple;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    border: 2px solid white;
+  }
+  100% {
+    border: 2px solid purple;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    border: 2px solid white;
+  }
+  100% {
+    border: 2px solid purple;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    border: 2px solid white;
+  }
+  100% {
+    border: 2px solid purple;
+  }
+}

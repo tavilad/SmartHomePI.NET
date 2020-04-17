@@ -10,18 +10,17 @@ import { FormFieldAppearanceExampleComponent } from './FormFieldAppearanceExampl
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
-    {
-        path: '',
-        runGuardsAndResolvers: 'always',
-        canActivate: [AuthGuard],
-        children: [
-            {path: 'temperature', component: TemperatureComponent},
-            {path: 'camera', component: CameraComponent},
-            {path: 'settings', component: SettingsComponent},
-            {path: 'profile', component: ProfileComponent},
-            {path: 'dashboard', component: DashboardComponent},
-            {path: 'example', component: FormFieldAppearanceExampleComponent}
-        ]
-    },
+    {path: 'temperature', runGuardsAndResolvers: 'always',
+        canActivate: [AuthGuard], component: TemperatureComponent},
+    {path: 'camera', runGuardsAndResolvers: 'always',
+        canActivate: [AuthGuard], component: CameraComponent, data: {animation: 'CameraPage'}},
+    {path: 'settings', runGuardsAndResolvers: 'always',
+        canActivate: [AuthGuard], component: SettingsComponent},
+    {path: 'profile', runGuardsAndResolvers: 'always',
+        canActivate: [AuthGuard], component: ProfileComponent},
+    {path: 'dashboard', runGuardsAndResolvers: 'always',
+        canActivate: [AuthGuard], component: DashboardComponent, data: {animation: 'DashboardPage'}},
+    {path: 'example', runGuardsAndResolvers: 'always',
+        canActivate: [AuthGuard], component: FormFieldAppearanceExampleComponent},
     {path: '**', redirectTo: '', pathMatch: 'full'},
 ];

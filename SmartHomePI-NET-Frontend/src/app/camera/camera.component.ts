@@ -5,14 +5,9 @@ import { fadeInAnimation } from '../_animations/index';
   selector: 'app-camera',
   templateUrl: './camera.component.html',
   styleUrls: ['./camera.component.css'],
-  animations: [fadeInAnimation]
 })
 
 export class CameraComponent implements OnInit {
-
-  @HostBinding('@fadeInAnimation') get fadeInAnimation() {
-    return '';
-  }
 
   constructor() { }
 

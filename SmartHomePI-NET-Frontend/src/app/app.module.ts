@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -29,9 +30,10 @@ import { TemperatureComponent } from './temperature/temperature.component';
 import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ProfileComponent } from './profile/profile.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent, DialogComponent } from './dashboard/dashboard.component';
 import { FormFieldAppearanceExampleComponent } from './FormFieldAppearanceExample/FormFieldAppearanceExample.component';
 import { LoginComponent } from './login/login.component';
+import { RoomService } from './_services/room.service';
 
 @NgModule({
    declarations: [
@@ -45,7 +47,8 @@ import { LoginComponent } from './login/login.component';
       ProfileComponent,
       DashboardComponent,
       FormFieldAppearanceExampleComponent,
-      LoginComponent
+      LoginComponent,
+      DialogComponent
    ],
    imports: [
       BrowserModule,
@@ -63,12 +66,14 @@ import { LoginComponent } from './login/login.component';
       MatButtonModule,
       MatMenuModule,
       MatDividerModule,
-      MatGridListModule
+      MatGridListModule,
+      MatDialogModule
    ],
    providers: [
       AuthService,
       ErrorInterceptorProvider,
-      AlertifyService
+      AlertifyService,
+      RoomService
    ],
    bootstrap: [
       AppComponent

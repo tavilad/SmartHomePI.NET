@@ -2,7 +2,7 @@
   <mat-grid-list cols="3" rowHeight="150px">
     <mat-grid-tile *ngFor="let tile of tiles"
     [colspan]="tile.cols"
-    [rowspan]="tile.rows">
+    [rowspan]="tile.rows" (click)="openDialog()">
        <span>{{tile.text}}</span>
     </mat-grid-tile>
     </mat-grid-list>

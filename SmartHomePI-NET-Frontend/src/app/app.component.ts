@@ -10,7 +10,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrls: ['./app.component.css'],
   animations: [
     slideInAnimation
-    // animation triggers go here
   ]
 })
 export class AppComponent implements OnInit {
@@ -26,6 +25,7 @@ export class AppComponent implements OnInit {
   }
 
   prepareRoute(outlet: RouterOutlet) {
+    // tslint:disable-next-line: no-string-literal
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 }

@@ -72,8 +72,25 @@ namespace SmartHomePI.NET.API.Controllers
             {
                 return BadRequest("The room requested does not exist.");
             }
-
         }
+
+        [HttpGet("Get/forUser/{userId}")]
+        public async Task<IActionResult> GetRoomByUserId(int userId)
+        {
+            IEnumerable<Room> roomList = await this.repository.Get(room => room.UserId == userId, null);
+
+            if (roomList != null)
+            {
+                return Ok(new
+                {
+                    roomList
+                });
+            }
+            else
+            {
+                return BadRequest("The rooms requested for userID "+ userId +" do not exist");
+            }
+        } 
 
         [HttpDelete("Delete/{roomId}")]
         public async Task<IActionResult> DeleteRoom(int roomId)

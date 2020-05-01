@@ -74,7 +74,7 @@ namespace SmartHomePI.NET.API.Controllers
             }
         }
 
-        [HttpGet("Get/forUser/{userId}")]
+        [HttpGet("forUser/{userId}")]
         public async Task<IActionResult> GetRoomByUserId(int userId)
         {
             IEnumerable<Room> roomList = await this.repository.Get(room => room.UserId == userId, null);

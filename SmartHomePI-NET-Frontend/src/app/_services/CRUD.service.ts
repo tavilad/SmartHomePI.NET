@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AlertifyService } from './alertify.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class CrudService {
 
   getAll() {
 
+  }
+
+  getForUserId(userId: any, tableName: string) {
+    return this.http.get(this.baseUrl + tableName + '/forUser/' + userId);
   }
 
 }

@@ -3,6 +3,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { AlertifyService } from '../_services/alertify.service';
 import { CrudService } from '../_services/CRUD.service';
 import { AuthService } from '../_services/auth.service';
+import { Observable } from 'rxjs';
 
 export interface Tile {
   cols: number;
@@ -10,6 +11,13 @@ export interface Tile {
   text: string;
   border: string;
  }
+
+export interface RoomInfo {
+  id: number;
+  roomName: string;
+  user: any;
+  roomId: number;
+}
 
 export interface DialogData {
   roomName: string;
@@ -23,25 +31,18 @@ export interface DialogData {
 
 export class DashboardComponent implements OnInit {
 
-  tiles: Tile[] = [
-    {text: 'Room 1', cols: 1, rows: 1 , border: '3px purple'},
-    {text: 'Room 2', cols: 1, rows: 1 , border: '3px purple'},
-    {text: 'Room 3', cols: 1, rows: 1 , border: '3px purple'},
-    {text: 'Room 4', cols: 1, rows: 1 , border: '3px purple'},
-    {text: 'Room 5', cols: 1, rows: 1 , border: '3px purple'},
-    {text: 'Room 6', cols: 1, rows: 1 , border: '3px purple'},
-    {text: 'Room 7', cols: 1, rows: 1 , border: '3px purple'},
-    {text: 'Room 8', cols: 1, rows: 1 , border: '3px purple'},
-    {text: 'Room 9', cols: 1, rows: 1 , border: '3px purple'},
-    ];
+  tiles: Tile[] = [];
 
   roomName: string;
   model: any = {};
+  rooms: Observable<any>;
 
   constructor(public dialog: MatDialog, private alertify: AlertifyService,
-              private crudService: CrudService, private authService: AuthService) { }
+              private crudService: CrudService, private authService: AuthService) {
+               }
 
   ngOnInit() {
+    this.initRooms();
   }
 
   openDialog() {
@@ -52,6 +53,7 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
         console.log(result);
+        // tslint:disable-next-line: radix
         this.model.userId = parseInt(this.authService.decodedToken.nameid);
         this.model.roomName = result;
         console.log(this.model);
@@ -61,6 +63,19 @@ export class DashboardComponent implements OnInit {
           this.alertify.error(error);
         });
       }
+    });
+  }
+
+   initRooms() {
+    // tslint:disable-next-line: radix
+    this.crudService.getForUserId(parseInt(this.authService.decodedToken.nameid), 'room')
+    .subscribe((rooms) => {
+      // tslint:disable-next-line: no-string-literal
+      this.rooms = rooms['roomList'];
+      console.log(this.rooms);
+      this.rooms.forEach((room) => {
+        this.tiles.push({text: room.roomName, cols: 1, rows: 1 , border: '3px purple'});
+      });
     });
   }
 

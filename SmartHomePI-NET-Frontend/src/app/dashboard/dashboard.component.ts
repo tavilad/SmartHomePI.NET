@@ -12,13 +12,6 @@ export interface Tile {
   border: string;
  }
 
-export interface RoomInfo {
-  id: number;
-  roomName: string;
-  user: any;
-  roomId: number;
-}
-
 export interface DialogData {
   roomName: string;
 }
@@ -66,7 +59,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-   initRooms() {
+  initRooms() {
     // tslint:disable-next-line: radix
     this.crudService.getForUserId(parseInt(this.authService.decodedToken.nameid), 'room')
     .subscribe((rooms) => {

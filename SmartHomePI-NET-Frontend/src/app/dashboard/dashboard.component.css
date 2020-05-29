@@ -11,13 +11,19 @@
     -ms-animation: fadeIn ease 1s;
 }
 
+.fixedbutton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px; 
+}
+
 body, html{
   height:100%;
 }
 
 @keyframes fadeIn {
   0% {
-    border: 2px solid white;
+    border: 2px solid rgb(235, 238, 238);
   }
   100% {
     border: 2px solid purple;
@@ -26,7 +32,7 @@ body, html{
 
 @-moz-keyframes fadeIn {
   0% {
-    border: 2px solid white;
+    border: 2px solid rgb(235, 238, 238);
   }
   100% {
     border: 2px solid purple;
@@ -35,7 +41,7 @@ body, html{
 
 @-webkit-keyframes fadeIn {
   0% {
-    border: 2px solid white;
+    border: 2px solid rgb(235, 238, 238);
   }
   100% {
     border: 2px solid purple;
@@ -44,7 +50,7 @@ body, html{
 
 @-o-keyframes fadeIn {
   0% {
-    border: 2px solid white;
+    border: 2px solid rgb(235, 238, 238);
   }
   100% {
     border: 2px solid purple;
@@ -53,7 +59,7 @@ body, html{
 
 @-ms-keyframes fadeIn {
   0% {
-    border: 2px solid white;
+    border: 2px solid rgb(235, 238, 238);
   }
   100% {
     border: 2px solid purple;

@@ -80,11 +80,12 @@ namespace SmartHomePI.NET.API.Controllers
             }
         }
 
-        // [HttpDelete]
-        // public async Task<IActionResult> DeleteUserDetails(int userDetailsId)
-        // {
-
-        // }
+        [HttpDelete("Delete/{userDetailsId}")]
+        public async Task<IActionResult> DeleteUserDetails(int userDetailsId)
+        {
+            await this.repository.Delete(userDetailsId);
+            return Ok();
+        }
 
         // [HttpPut]
         // public async Task<IActionResult> UpdateUserDetails(int userDetailsId)

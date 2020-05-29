@@ -96,7 +96,7 @@ namespace SmartHomePI.NET.API.Controllers
         public async Task<IActionResult> DeleteRoom(int roomId)
         {
             await this.repository.Delete(roomId);
-            return StatusCode(200);
+            return Ok();
         }
 
         // [HttpPut("Update/{roomId}")]

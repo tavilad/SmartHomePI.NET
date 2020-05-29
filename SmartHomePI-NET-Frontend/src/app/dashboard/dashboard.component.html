@@ -2,9 +2,14 @@
   <mat-grid-list cols="3" rowHeight="150px">
     <mat-grid-tile *ngFor="let tile of tiles"
     [colspan]="tile.cols"
-    [rowspan]="tile.rows" (click)="openDialog()">
+    [rowspan]="tile.rows">
        <span>{{tile.text}}</span>
     </mat-grid-tile>
     </mat-grid-list>
+</div>
+<div>
+  <button mat-fab color="primary" class="fixedbutton" (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
 </div>
 

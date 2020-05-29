@@ -52,6 +52,7 @@ export class DashboardComponent implements OnInit {
         console.log(this.model);
         this.crudService.create(this.model, 'room').subscribe(() => {
           this.alertify.success('Created room ' + this.model.roomName);
+          this.tiles.push({text: this.model.roomName, cols: 1, rows: 1 , border: '3px purple'});
         }, error => {
           this.alertify.error(error);
         });

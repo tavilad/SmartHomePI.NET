@@ -18,6 +18,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -34,6 +35,7 @@ import { DashboardComponent, DialogComponent } from './dashboard/dashboard.compo
 import { FormFieldAppearanceExampleComponent } from './FormFieldAppearanceExample/FormFieldAppearanceExample.component';
 import { LoginComponent } from './login/login.component';
 import { CrudService } from './_services/CRUD.service';
+import { RoompageComponent } from './roompage/roompage.component';
 
 @NgModule({
    declarations: [
@@ -48,7 +50,8 @@ import { CrudService } from './_services/CRUD.service';
       DashboardComponent,
       FormFieldAppearanceExampleComponent,
       LoginComponent,
-      DialogComponent
+      DialogComponent,
+      RoompageComponent
    ],
    imports: [
       BrowserModule,
@@ -67,7 +70,8 @@ import { CrudService } from './_services/CRUD.service';
       MatMenuModule,
       MatDividerModule,
       MatGridListModule,
-      MatDialogModule
+      MatDialogModule,
+      MatCardModule
    ],
    providers: [
       AuthService,

@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
         console.log(this.model);
         this.crudService.create(this.model, 'room').subscribe(() => {
           this.alertify.success('Created room ' + this.model.roomName);
-          this.tiles.push({text: this.model.roomName, cols: 1, rows: 1 , border: '3px purple'});
+          this.tiles.push({text: this.model.roomName, cols: 1, rows: 1 , border: ''});
         }, error => {
           this.alertify.error(error);
         });
@@ -68,9 +68,13 @@ export class DashboardComponent implements OnInit {
       this.rooms = rooms['roomList'];
       console.log(this.rooms);
       this.rooms.forEach((room) => {
-        this.tiles.push({text: room.roomName, cols: 1, rows: 1 , border: '3px purple'});
+        this.tiles.push({text: room.roomName, cols: 1, rows: 1 , border: ''});
       });
     });
+  }
+
+  removeRoom(model: any) {
+    console.log('remove room');
   }
 
 }

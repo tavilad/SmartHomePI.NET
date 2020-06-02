@@ -1,4 +1,4 @@
-.mat-grid-tile:hover {
+/* .mat-grid-tile:hover {
     border-radius: 25px;
     border: 2px solid purple;
     padding: 20px; 
@@ -9,7 +9,7 @@
     -moz-animation: fadeIn ease 1s;
     -o-animation: fadeIn ease 1s;
     -ms-animation: fadeIn ease 1s;
-}
+} */
 
 .fixedbutton {
   position: fixed;

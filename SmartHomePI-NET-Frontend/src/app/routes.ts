@@ -6,7 +6,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { SettingsComponent } from './settings/settings.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { FormFieldAppearanceExampleComponent } from './FormFieldAppearanceExample/FormFieldAppearanceExample.component';
+import { RoompageComponent } from './roompage/roompage.component';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -20,7 +20,7 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard], component: ProfileComponent, data: {animation: 'ProfilePage'}},
     {path: 'dashboard', runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard], component: DashboardComponent, data: {animation: 'DashboardPage'}},
-    {path: 'example', runGuardsAndResolvers: 'always',
-        canActivate: [AuthGuard], component: FormFieldAppearanceExampleComponent},
+    {path: 'roompage', runGuardsAndResolvers: 'always',
+        canActivate: [AuthGuard], component: RoompageComponent, data: {animation: 'RoomPage'}},
     {path: '**', redirectTo: '', pathMatch: 'full'},
 ];

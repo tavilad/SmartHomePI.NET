@@ -20,7 +20,7 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard], component: ProfileComponent, data: {animation: 'ProfilePage'}},
     {path: 'dashboard', runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard], component: DashboardComponent, data: {animation: 'DashboardPage'}},
-    {path: 'roompage', runGuardsAndResolvers: 'always',
+    {path: 'roompage/:id', runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard], component: RoompageComponent, data: {animation: 'RoomPage'}},
     {path: '**', redirectTo: '', pathMatch: 'full'},
 ];

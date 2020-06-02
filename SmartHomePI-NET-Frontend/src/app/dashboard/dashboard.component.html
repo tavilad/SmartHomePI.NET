@@ -3,7 +3,7 @@
     <mat-grid-tile *ngFor="let tile of tiles"
     [colspan]="tile.cols"
     [rowspan]="tile.rows"
-    [routerLink]="['/roompage']">
+    [routerLink]="['/roompage',tiles.indexOf(tile)]">
     <mat-card class="example-card">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>

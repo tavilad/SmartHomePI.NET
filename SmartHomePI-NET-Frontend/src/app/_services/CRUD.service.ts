@@ -31,4 +31,8 @@ export class CrudService {
     return this.http.get(this.baseUrl + tableName + '/forUser/' + userId);
   }
 
+  getById(id: any, tableName: string) {
+    return this.http.get(this.baseUrl + tableName + id);
+  }
+
 }

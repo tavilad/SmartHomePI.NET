@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { CrudService } from '../_services/CRUD.service';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-roompage',
@@ -10,15 +12,25 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RoompageComponent implements OnInit {
 
-  constructor(public activatedRoute: ActivatedRoute) { }
+  constructor(public activatedRoute: ActivatedRoute, public crudService: CrudService, public authService: AuthService) { }
 
-  state$: Observable<any>;
+  public roomIndex: string;
+
+  rooms: Observable<any>;
+  public selectedRoom: any;
 
   ngOnInit(): void {
-    this.state$ = this.activatedRoute.paramMap
-      .pipe(map(() => window.history.state));
+    this.roomIndex = this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.state$.subscribe(obj => console.log(obj));
+    console.log(this.roomIndex);
+
+    this.crudService.getForUserId(parseInt(this.authService.decodedToken.nameid), 'room')
+    .subscribe((rooms) => {
+      // tslint:disable-next-line: no-string-literal
+      this.rooms = rooms['roomList'];
+      console.log(this.rooms);
+      this.selectedRoom = this.rooms[this.roomIndex];
+    });
   }
 
 }

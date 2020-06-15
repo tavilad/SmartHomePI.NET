@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SmartHomePI.NET.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TemperatureController : ControllerBase

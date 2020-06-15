@@ -1,12 +1,7 @@
-using System.Threading;
 using Iot.Device.DHTxx;
 using Iot.Units;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Unosquare.RaspberryIO;
-using Unosquare.RaspberryIO.Abstractions;
-using Unosquare.RaspberryIO.Peripherals;
-using Unosquare.WiringPi;
 
 namespace SmartHomePI.NET.API.Controllers
 {
@@ -15,33 +10,26 @@ namespace SmartHomePI.NET.API.Controllers
     public class TemperatureController : ControllerBase
     {
         private const int PIN = 4;
-        private Temperature lastSuccessfulReadingTemperature;
-        private double temperature;
-        private double humidity;
-
-        public TemperatureController()
-        {
-            Pi.Init<BootstrapWiringPi>();
-        }
+        private Temperature lastReading;
         
         [HttpGet]
         public IActionResult GetTemperature()
         {
-            using(var sensor = DhtSensor.Create(DhtType.Dht11, Pi.Gpio[BcmPin.Gpio04]))
+            using (Dht11 dht = new Dht11(PIN))
             {
-                sensor.OnDataAvailable += (s, e) =>
-                {
-                    if (!e.IsValid)
-                        return;
-                    this.temperature = e.Temperature;
-                    this.humidity = e.HumidityPercentage;
-                };
-                sensor.Start();
-                Thread.Sleep(2000);
-                return Ok(new {
-                    temperature = this.temperature.ToString(),
-                    humidity = this.humidity.ToString()
-                });
+                Temperature temperature = dht.Temperature;
+                double humidity = dht.Humidity;
+
+                if(dht.IsLastReadSuccessful){
+                    return Ok(new{
+                        temperature = temperature.Celsius.ToString(),
+                        humidity = humidity.ToString()
+                    });
+                }
+                else{
+                    return NotFound("Could not read data from sensor");
+                }
+
             }
         }
     }

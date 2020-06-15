@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using System.Threading;
 using Iot.Device.DHTxx;
 using Iot.Units;
 using Microsoft.AspNetCore.Authorization;
@@ -37,6 +37,7 @@ namespace SmartHomePI.NET.API.Controllers
                     this.humidity = e.HumidityPercentage;
                 };
                 sensor.Start();
+                Thread.Sleep(2000);
                 return Ok(new {
                     temperature = this.temperature.ToString(),
                     humidity = this.humidity.ToString()

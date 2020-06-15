@@ -10,11 +10,8 @@ namespace SmartHomePI.NET.API.Controllers
     public class TemperatureController : ControllerBase
     {
         private const int PIN = 4;
-
-        public TemperatureController()
-        {
-
-        }
+        private Temperature lastSuccessfulReadingTemperature;
+        private double lastSucccessfulReadingHumidity;
         
         [HttpGet]
         public IActionResult GetTemperature()
@@ -24,10 +21,24 @@ namespace SmartHomePI.NET.API.Controllers
                 Temperature temperature = dht.Temperature;
                 double humidity = dht.Humidity;
 
-                return Ok(new{
-                    temperature = temperature.Celsius.ToString(),
-                    humidity = humidity.ToString()
-                });
+                if(dht.IsLastReadSuccessful)
+                {
+                    this.lastSuccessfulReadingTemperature = temperature;
+                    this.lastSucccessfulReadingHumidity = humidity;
+
+                    return Ok(new {
+                        temperature = temperature.Celsius.ToString(),
+                        humidity = humidity.ToString()
+                    });
+                }
+                else
+                {
+                    return Ok(new {
+                        temperature = this.lastSuccessfulReadingTemperature.Celsius.ToString(),
+                        humidity = this.lastSucccessfulReadingHumidity.ToString()
+                    });
+                }
+
             }
         }
     }

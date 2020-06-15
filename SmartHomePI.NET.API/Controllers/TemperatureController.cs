@@ -1,7 +1,12 @@
+using System.Threading.Tasks;
 using Iot.Device.DHTxx;
 using Iot.Units;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Unosquare.RaspberryIO;
+using Unosquare.RaspberryIO.Abstractions;
+using Unosquare.RaspberryIO.Peripherals;
+using Unosquare.WiringPi;
 
 namespace SmartHomePI.NET.API.Controllers
 {
@@ -11,34 +16,32 @@ namespace SmartHomePI.NET.API.Controllers
     {
         private const int PIN = 4;
         private Temperature lastSuccessfulReadingTemperature;
-        private double lastSucccessfulReadingHumidity;
+        private double temperature;
+        private double humidity;
+
+        public TemperatureController()
+        {
+            Pi.Init<BootstrapWiringPi>();
+        }
         
         [HttpGet]
-        public IActionResult GetTemperature()
+        public async Task<IActionResult> GetTemperature()
         {
-            using (Dht11 dht = new Dht11(PIN))
+            using(var sensor = DhtSensor.Create(DhtType.Dht11, Pi.Gpio[BcmPin.Gpio04]))
             {
-                Temperature temperature = dht.Temperature;
-                double humidity = dht.Humidity;
-
-                if(dht.IsLastReadSuccessful)
+                sensor.Start();
+                sensor.OnDataAvailable += (s, e) =>
                 {
-                    this.lastSuccessfulReadingTemperature = temperature;
-                    this.lastSucccessfulReadingHumidity = humidity;
-
-                    return Ok(new {
-                        temperature = temperature.Celsius.ToString(),
-                        humidity = humidity.ToString()
-                    });
-                }
-                else
-                {
-                    return Ok(new {
-                        temperature = this.lastSuccessfulReadingTemperature.Celsius.ToString(),
-                        humidity = this.lastSucccessfulReadingHumidity.ToString()
-                    });
-                }
-
+                    if (!e.IsValid)
+                        return;
+                    this.temperature = e.Temperature;
+                    this.humidity = e.HumidityPercentage;
+                };
+                
+                return Ok(new {
+                    temperature = this.temperature.ToString(),
+                    humidity = this.humidity.ToString()
+                });
             }
         }
     }

@@ -19,16 +19,12 @@ namespace SmartHomePI.NET.API.Controllers
             {
                 Temperature temperature = dht.Temperature;
                 double humidity = dht.Humidity;
+                
+                return Ok(new{
+                    temperature = temperature.Celsius.ToString(),
+                    humidity = humidity.ToString()
+                });
 
-                if(dht.IsLastReadSuccessful){
-                    return Ok(new{
-                        temperature = temperature.Celsius.ToString(),
-                        humidity = humidity.ToString()
-                    });
-                }
-                else{
-                    return NotFound("Could not read data from sensor");
-                }
 
             }
         }

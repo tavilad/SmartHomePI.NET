@@ -25,11 +25,10 @@ namespace SmartHomePI.NET.API.Controllers
         }
         
         [HttpGet]
-        public async Task<IActionResult> GetTemperature()
+        public IActionResult GetTemperature()
         {
             using(var sensor = DhtSensor.Create(DhtType.Dht11, Pi.Gpio[BcmPin.Gpio04]))
             {
-                sensor.Start();
                 sensor.OnDataAvailable += (s, e) =>
                 {
                     if (!e.IsValid)
@@ -37,7 +36,7 @@ namespace SmartHomePI.NET.API.Controllers
                     this.temperature = e.Temperature;
                     this.humidity = e.HumidityPercentage;
                 };
-                
+                sensor.Start();
                 return Ok(new {
                     temperature = this.temperature.ToString(),
                     humidity = this.humidity.ToString()

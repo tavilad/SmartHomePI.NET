@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  removeRoom(model: any) {
+  removeRoom(selectedRoomId: string) {
     console.log('remove room');
   }
 

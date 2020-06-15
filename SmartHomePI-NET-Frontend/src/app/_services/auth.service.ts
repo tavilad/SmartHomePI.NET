@@ -8,7 +8,7 @@ import { AlertifyService } from './alertify.service';
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = 'http://192.168.0.143:5000/api/auth/';
+  baseUrl = 'http://192.168.0.143:8080/api/auth/';
   jwtHelper = new JwtHelperService();
   decodedToken: any;
 

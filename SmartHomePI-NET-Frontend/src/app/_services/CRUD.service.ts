@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CrudService {
-  baseUrl = 'http://192.168.0.143:5000/api/';
+  baseUrl = 'http://192.168.0.143:8080/api/';
 
   constructor(private http: HttpClient, private alertify: AlertifyService) { }
 

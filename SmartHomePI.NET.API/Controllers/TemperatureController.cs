@@ -5,14 +5,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SmartHomePI.NET.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TemperatureController : ControllerBase
     {
         private const int PIN = 4;
+
+        public TemperatureController()
+        {
+
+        }
         
         [HttpGet]
-        private IActionResult GetTemperature()
+        public IActionResult GetTemperature()
         {
             using (Dht11 dht = new Dht11(PIN))
             {
@@ -20,8 +26,8 @@ namespace SmartHomePI.NET.API.Controllers
                 double humidity = dht.Humidity;
 
                 return Ok(new{
-                    temperature = temperature.Celsius,
-                    humidity = humidity
+                    temperature = temperature.Celsius.ToString(),
+                    humidity = humidity.ToString()
                 });
             }
         }

@@ -30,8 +30,8 @@ namespace SmartHomePI.NET.API.Controllers
                 else
                 {
                     return Ok(new{
-                        temperature = 24,
-                        humidity = 70
+                        temperature = "",
+                        humidity = ""
                     });
                 }
 

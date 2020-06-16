@@ -75,6 +75,7 @@ export class DashboardComponent implements OnInit {
 
   removeRoom(selectedRoomId: string) {
     console.log('remove room');
+    this.alertify.success(selectedRoomId);
   }
 
 }

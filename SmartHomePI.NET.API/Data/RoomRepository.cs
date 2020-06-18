@@ -15,11 +15,11 @@ namespace SmartHomePI.NET.API.Data
 
         }
 
-        public async Task DeleteByName(string roomName)
+        public async Task DeleteByName(string roomName, int userId)
         {
             var dbSet = this.context.Set<Room>();
 
-            Room entity = dbSet.FirstOrDefault(room => room.RoomName.Equals(roomName));
+            Room entity = dbSet.FirstOrDefault(room => room.RoomName.Equals(roomName) && room.UserId == userId);
 
             if (this.context.Entry(entity).State == EntityState.Detached)
             {

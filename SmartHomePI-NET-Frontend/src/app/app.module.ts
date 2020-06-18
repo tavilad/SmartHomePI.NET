@@ -32,7 +32,6 @@ import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent, DialogComponent } from './dashboard/dashboard.component';
-import { FormFieldAppearanceExampleComponent } from './FormFieldAppearanceExample/FormFieldAppearanceExample.component';
 import { LoginComponent } from './login/login.component';
 import { CrudService } from './_services/CRUD.service';
 import { RoompageComponent } from './roompage/roompage.component';
@@ -48,7 +47,6 @@ import { RoompageComponent } from './roompage/roompage.component';
       SettingsComponent,
       ProfileComponent,
       DashboardComponent,
-      FormFieldAppearanceExampleComponent,
       LoginComponent,
       DialogComponent,
       RoompageComponent

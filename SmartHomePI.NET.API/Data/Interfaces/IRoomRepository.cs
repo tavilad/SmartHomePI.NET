@@ -5,6 +5,6 @@ namespace SmartHomePI.NET.API.Data.Interfaces
 {
     public interface IRoomRepository : IBaseRepository<Room>
     {
-        Task DeleteByName(string roomName);
+        Task DeleteByName(string roomName, int userId);
     }
 }

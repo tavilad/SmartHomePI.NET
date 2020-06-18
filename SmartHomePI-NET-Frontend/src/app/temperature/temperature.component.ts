@@ -11,7 +11,7 @@ import { flatMap } from 'rxjs/operators';
 })
 
 export class TemperatureComponent implements OnInit {
-  baseUrl = 'http://192.168.0.143:8080/api/temperature';
+  baseUrl = 'http://localhost:5000/api/temperature';
   reading: any = {};
   constructor(private http: HttpClient) { }
 

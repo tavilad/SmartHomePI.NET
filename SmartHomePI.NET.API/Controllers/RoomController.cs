@@ -99,10 +99,10 @@ namespace SmartHomePI.NET.API.Controllers
             return Ok();
         }
 
-        [HttpDelete("DeleteByName/{roomName}")]
-        public async Task<IActionResult> DeleteByName(string roomName)
+        [HttpDelete("DeleteByName/{roomName}/{userId}")]
+        public async Task<IActionResult> DeleteByName(string roomName, int userId)
         {
-            await this.repository.DeleteByName(roomName);
+            await this.repository.DeleteByName(roomName, userId);
             return Ok();
         }
 

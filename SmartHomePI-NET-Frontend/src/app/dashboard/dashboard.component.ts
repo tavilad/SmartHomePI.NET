@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit {
   removeRoom(selectedRoomId: string) {
     console.log('remove room');
     this.alertify.success(selectedRoomId);
-    this.crudService.deleteByName(selectedRoomId, 'room').subscribe(() =>{
+    this.crudService.deleteByName(selectedRoomId, this.authService.decodedToken.nameid, 'room').subscribe(() => {
       const index = this.tiles.findIndex(tile => tile.text === selectedRoomId);
       if (index !== -1) {
         this.tiles.splice(index, 1);

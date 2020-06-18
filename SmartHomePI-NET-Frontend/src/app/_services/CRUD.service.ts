@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CrudService {
-  baseUrl = 'http://192.168.0.143:8080/api/';
+  baseUrl = 'http://localhost:5000/api/';
 
   constructor(private http: HttpClient, private alertify: AlertifyService) { }
 
@@ -35,8 +35,8 @@ export class CrudService {
     return this.http.get(this.baseUrl + tableName + id);
   }
 
-  deleteByName(roomName: string, tableName: string) {
-    return this.http.delete(this.baseUrl + tableName  + '/DeleteByName/' + roomName);
+  deleteByName(roomName: string, userId: any, tableName: string) {
+    return this.http.delete(this.baseUrl + tableName  + '/DeleteByName/' + roomName + '/' + userId);
   }
 
 }

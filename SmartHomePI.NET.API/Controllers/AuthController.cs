@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SmartHomePI.NET.API.Data;
+using SmartHomePI.NET.API.Data.Interfaces;
 using SmartHomePI.NET.API.DTOs;
 using SmartHomePI.NET.API.Models;
 
@@ -19,11 +20,13 @@ namespace SmartHomePI.NET.API.Controllers
     {
         private readonly IAuthRepository _repository;
         private readonly IConfiguration _configuration;
+        private readonly IMailService mailService;
 
-        public AuthController(IAuthRepository repository, IConfiguration configuration)
+        public AuthController(IAuthRepository repository, IConfiguration configuration, IMailService mailService)
         {
             this._configuration = configuration;
             this._repository = repository;
+            this.mailService = mailService;
         }
 
         [HttpPost("register")]
@@ -42,6 +45,12 @@ namespace SmartHomePI.NET.API.Controllers
             };
 
             User createdUser = await this._repository.Register(userToCreate, user.Password);
+
+            await this.mailService.SendMailAsync(new MailRequest(){
+                ToEmail = "pintiliciucoctavian@gmail.com",
+                Subject = "Thank you for registering!",
+                Body = $"Welcome {userToCreate.Username}! Thanks for creating an account on SmartHomePI.NET! Now you can start working on automating your home."
+            });
 
             return StatusCode(201);
         }

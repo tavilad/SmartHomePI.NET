@@ -3,3 +3,12 @@
   Humidity {{reading.humidity}}
 </h1>
 
+<div>
+  <canvas
+    baseChart
+    [chartType]="'line'"
+    [datasets]="datasets"
+    [options]="options">
+  </canvas>
+</div>
+

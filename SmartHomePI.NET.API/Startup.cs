@@ -17,9 +17,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using SmartHomePI.NET.API.Controllers;
 using SmartHomePI.NET.API.Data;
 using SmartHomePI.NET.API.Data.Interfaces;
 using SmartHomePI.NET.API.Helpers;
+using SmartHomePI.NET.API.Settings;
 
 namespace SmartHomePI.NET.API
 {
@@ -39,6 +41,8 @@ namespace SmartHomePI.NET.API
 
             services.AddControllers();
 
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+
             services.AddCors();
 
             services.AddScoped<IAuthRepository, AuthRepository>();
@@ -46,6 +50,8 @@ namespace SmartHomePI.NET.API
             services.AddScoped<IRoomRepository, RoomRepository>();
 
             services.AddScoped<IUserDetailsRepository, UserDetailsRepository>();
+
+            services.AddTransient<IMailService, MailService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {

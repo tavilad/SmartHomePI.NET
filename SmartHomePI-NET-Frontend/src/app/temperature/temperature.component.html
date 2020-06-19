@@ -1,14 +1,14 @@
-<h1>
-  Temperature {{reading.temperature}}
-  Humidity {{reading.humidity}}
-</h1>
-
-<div>
+<div class="shrink">
   <canvas
     baseChart
     [chartType]="'line'"
     [datasets]="datasets"
     [options]="options">
   </canvas>
+  <button color="primary" mat-raised-button (click)="togglePause()">
+    Pause
+  </button>
 </div>
+
+
 

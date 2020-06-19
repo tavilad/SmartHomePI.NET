@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
 import { fadeInAnimation } from '../_animations/index';
 import { HttpClient } from '@angular/common/http';
 import { Observable, interval } from 'rxjs';
@@ -16,7 +16,9 @@ export class TemperatureComponent implements OnInit {
 
   reading: any = {};
 
-  datasets: any[] = [{ data: [] }, { data: [] }];
+  isChartPaused: boolean;
+
+  datasets: any[] = [{label: 'Temperature', data: [] }, { label: 'Humidity', data: [] }];
   options: any = {
     scales: {
       xAxes: [{ type: 'realtime' }]
@@ -24,26 +26,29 @@ export class TemperatureComponent implements OnInit {
     plugins: {
       streaming: {
         delay: 2000,
-        onRefresh: function (chart: any) {
-          chart.data.datasets.forEach(function (dataset: any) {
-            dataset.data.push({
-              x: Date.now(),
-              y: Math.random()
-            });
-          });
-        },
+        duration: 50000,
+        frameRate: 30,
+        refresh: 1000,
+        onRefresh: function(chart: any) {
+          this.http.get(this.baseUrl).subscribe((reading) => {
+            chart.data.datasets[0].data.push({x: Date.now(), y: reading.temperature});
+            chart.data.datasets[1].data.push({x: Date.now(), y: reading.humidity});
+          }
+          );
+        }.bind(this),
       },
-    }
+    },
+    tooltips: {mode: 'nearest', intersect: false }, hover: { mode: 'nearest', intersect: false },
   };
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.getTemperatureAndHumidity();
   }
 
-  getTemperatureAndHumidity() {
-    interval(2000).pipe(flatMap(() => this.http.get(this.baseUrl))).subscribe((reading) => this.reading = reading);
+  togglePause() {
+    this.isChartPaused = !this.isChartPaused;
+    this.options.scales.xAxes[0].pause = this.isChartPaused;
   }
 
 }

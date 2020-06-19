@@ -3,12 +3,6 @@
     <a *ngIf="loggedIn()" class="navbar-brand" [routerLink]="['/dashboard']">SmartHomePI</a>
     <a *ngIf="!loggedIn()" class="navbar-brand" [routerLink]="['/home']">SmartHomePI</a>
 
-    <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/camera']">Camera</a>
-      </li>
-    </ul>
-
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
       <button mat-button [matMenuTriggerFor]="menu">
         <span class="text-white">

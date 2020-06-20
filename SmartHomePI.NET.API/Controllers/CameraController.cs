@@ -79,36 +79,34 @@ namespace SmartHomePI.NET.API.Controllers
             // The default framerate is set to 30fps. You can see what "modes" the different cameras support by looking:
             // https://github.com/techyian/MMALSharp/wiki/OmniVision-OV5647-Camera-Module
             // https://github.com/techyian/MMALSharp/wiki/Sony-IMX219-Camera-Module            
+            MMALCamera cam = MMALCamera.Instance;
+
             using (var myCaptureHandler = new EmguInMemoryCaptureHandler())
             using (var splitter = new MMALSplitterComponent())
-            using (var renderer = new MMALNullSinkComponent())
+            using (var imgEncoder = new MMALImageEncoder(continuousCapture: true))
+            using (var nullSink = new MMALNullSinkComponent())
             {
                 cam.ConfigureCameraSettings();
+
+                myCaptureHandler.MyEmguEvent += OnEmguEventCallback;
                 
-                // Register to the event.
-                myCaptureHandler.MyEmguEvent += this.OnEmguEventCallback;
+                var portConfig = new MMALPortConfig(MMALEncoding.MJPEG, MMALEncoding.MJPEG, 90);
 
-                // We are instructing the splitter to do a format conversion to BGR24.
-                var splitterPortConfig = new MMALPortConfig(MMALEncoding.I420, MMALEncoding.I420, width: 800, height: 600);
-
-                // By default in MMALSharp, the Video port outputs using proprietary communication (Opaque) with a YUV420 pixel format.
-                // Changes to this are done via MMALCameraConfig.VideoEncoding and MMALCameraConfig.VideoSubformat.                
-                splitter.ConfigureInputPort(new MMALPortConfig(MMALEncoding.OPAQUE, MMALEncoding.I420), cam.Camera.VideoPort, null);
-
-                // We then use the splitter config object we constructed earlier. We then tell this output port to use our capture handler to record data.
-                splitter.ConfigureOutputPort<SplitterVideoPort>(0, splitterPortConfig, myCaptureHandler);
-
-                cam.Camera.PreviewPort.ConnectTo(renderer);
+                // Create our component pipeline.         
+                imgEncoder.ConfigureOutputPort(portConfig, myCaptureHandler);
+                        
                 cam.Camera.VideoPort.ConnectTo(splitter);
-
+                splitter.Outputs[0].ConnectTo(imgEncoder);                    
+                cam.Camera.PreviewPort.ConnectTo(nullSink);
+                
                 // Camera warm up time
-                await Task.Delay(2000).ConfigureAwait(false);
-
-                // Record for 10 seconds. Increase as required.
-                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(1000));
-
+                await Task.Delay(2000);
+                        
+                CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(15000));
+                
+                // Process images for 15 seconds.        
                 await cam.ProcessAsync(cam.Camera.VideoPort, cts.Token);
-            }
+                }
         }
 
     public class EmguEventArgs : EventArgs

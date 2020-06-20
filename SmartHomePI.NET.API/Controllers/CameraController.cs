@@ -74,35 +74,32 @@ namespace SmartHomePI.NET.API.Controllers
             // https://github.com/techyian/MMALSharp/wiki/OmniVision-OV5647-Camera-Module
             // https://github.com/techyian/MMALSharp/wiki/Sony-IMX219-Camera-Module            
             using (var vidCaptureHandler = new EmguInMemoryCaptureHandler())
-            using (var splitter = new MMALSplitterComponent())
-            using (var renderer = new MMALNullSinkComponent())
+            using (var mjpgCaptureHandler = new VideoStreamCaptureHandler("/home/pi/videos/", "mjpeg"))
+            using (var vidEncoder = new MMALVideoEncoder())
+            using (var renderer = new MMALVideoRenderer())
             {
-                cam.ConfigureCameraSettings();
-                
-                // Register to the event.
-                vidCaptureHandler.MyEmguEvent += this.OnEmguEventCallback;
-
-                // We are instructing the splitter to do a format conversion to BGR24.
-                var splitterPortConfig = new MMALPortConfig(MMALEncoding.BGR24, MMALEncoding.BGR24, 0, 0, null);
-
-                // By default in MMALSharp, the Video port outputs using proprietary communication (Opaque) with a YUV420 pixel format.
-                // Changes to this are done via MMALCameraConfig.VideoEncoding and MMALCameraConfig.VideoSubformat.                
-                splitter.ConfigureInputPort(new MMALPortConfig(MMALEncoding.OPAQUE, MMALEncoding.I420), cam.Camera.VideoPort, null);
-
-                // We then use the splitter config object we constructed earlier. We then tell this output port to use our capture handler to record data.
-                splitter.ConfigureOutputPort<SplitterVideoPort>(0, splitterPortConfig, vidCaptureHandler);
-
-                cam.Camera.PreviewPort.ConnectTo(renderer);
-                cam.Camera.VideoPort.ConnectTo(splitter);
+                cam.ConfigureCameraSettings();   
 
                 // Camera warm up time
-                await Task.Delay(2000).ConfigureAwait(false);
+                await Task.Delay(2000);                   
+            
+                var portConfigMJPEG = new MMALPortConfig(MMALEncoding.MJPEG, MMALEncoding.I420, quality: 90, bitrate: MMALVideoEncoder.MaxBitrateMJPEG);
 
-                // Record for 10 seconds. Increase as required.
-                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(1000));
 
-                await cam.ProcessAsync(cam.Camera.VideoPort, cts.Token);
+                cam.Camera.VideoPort.ConnectTo(vidEncoder);
+                cam.Camera.PreviewPort.ConnectTo(renderer);
+                
+                // Here we change the encoding type of the video encoder to MJPEG.
+                vidEncoder.ConfigureOutputPort(portConfigMJPEG, mjpgCaptureHandler);
+                
+                var cts = new CancellationTokenSource(TimeSpan.FromMinutes(3));
+                
+                // Take video for 3 minutes.
+                await cam.ProcessAsync(cam.Camera.VideoPort, cts.Token);        
             }
+
+            // Only call when you no longer require the camera, i.e. on app shutdown.
+            cam.Cleanup();
         }
 
     public class EmguEventArgs : EventArgs

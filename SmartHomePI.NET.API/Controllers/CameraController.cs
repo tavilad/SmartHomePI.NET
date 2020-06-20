@@ -27,7 +27,7 @@ namespace SmartHomePI.NET.API.Controllers
             cam = MMALCamera.Instance;
             MMALCameraConfig.Resolution = new Resolution(800, 600);
             cam.ConfigureCameraSettings();
-            this.ChangeVideoEncodingType();
+            this.ChangeVideoEncodingType().GetAwaiter().GetResult();
         }
 
         [HttpGet]

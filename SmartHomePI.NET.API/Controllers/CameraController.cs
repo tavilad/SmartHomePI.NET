@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Net.Http;
 using System.Threading;
@@ -22,6 +23,7 @@ namespace SmartHomePI.NET.API.Controllers
     {
         private Bitmap frame = null;
         private MMALCamera cam;
+        bool saveOnce = true;
         public  CameraController()
         {
             cam = MMALCamera.Instance;
@@ -49,7 +51,7 @@ namespace SmartHomePI.NET.API.Controllers
                     {
                         continue;
                     }
-                    this.frame.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    this.frame.Save(ms, ImageFormat.Jpeg);
                     byte[] buffer = ms.GetBuffer();
 
                     writer.WriteLine("--frame");
@@ -65,16 +67,21 @@ namespace SmartHomePI.NET.API.Controllers
         protected virtual void OnEmguEventCallback(object sender, EmguEventArgs args)
         {
             Console.WriteLine("I'm in OnEmguEventCallback.");
-
+            
             using (var ms = new MemoryStream(args.ImageData))
             {
                 this.frame = new Bitmap(ms);
+                if(saveOnce)
+                {
+                    this.frame.Save("test", ImageFormat.Jpeg);
+                    saveOnce = false;
+                }
             }
         }
 
         public async Task ChangeVideoEncodingType()
         {
-             MMALCameraConfig.Resolution = new Resolution(800, 600);
+            MMALCameraConfig.Resolution = new Resolution(800, 600);
             // By default, video resolution is set to 1920x1080 which will probably be too large for your project. Set as appropriate using MMALCameraConfig.VideoResolution
             // The default framerate is set to 30fps. You can see what "modes" the different cameras support by looking:
             // https://github.com/techyian/MMALSharp/wiki/OmniVision-OV5647-Camera-Module
@@ -90,7 +97,7 @@ namespace SmartHomePI.NET.API.Controllers
 
                 myCaptureHandler.MyEmguEvent += OnEmguEventCallback;
                 
-                var portConfig = new MMALPortConfig(MMALEncoding.JPEG, MMALEncoding.I420, 90);
+                var portConfig = new MMALPortConfig(MMALEncoding.MJPEG, MMALEncoding.I420, 90);
 
                 // Create our component pipeline.         
                 imgEncoder.ConfigureOutputPort(portConfig, myCaptureHandler);

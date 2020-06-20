@@ -47,7 +47,7 @@ namespace SmartHomePI.NET.API.Controllers
                     this.frame.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                     byte[] buffer = ms.GetBuffer();
 
-                    writer.WriteLine("--boundary");
+                    writer.WriteLine("frame");
                     writer.WriteLine("Content-Type: image/jpeg");
                     writer.WriteLine(string.Format("Content-length: {0}", buffer.Length));
                     writer.WriteLine();

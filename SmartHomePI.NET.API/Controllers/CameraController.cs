@@ -74,6 +74,7 @@ namespace SmartHomePI.NET.API.Controllers
 
         public async Task ChangeVideoEncodingType()
         {
+             MMALCameraConfig.Resolution = new Resolution(800, 600);
             // By default, video resolution is set to 1920x1080 which will probably be too large for your project. Set as appropriate using MMALCameraConfig.VideoResolution
         // The default framerate is set to 30fps. You can see what "modes" the different cameras support by looking:
         // https://github.com/techyian/MMALSharp/wiki/OmniVision-OV5647-Camera-Module

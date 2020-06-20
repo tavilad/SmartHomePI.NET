@@ -85,7 +85,7 @@ namespace SmartHomePI.NET.API.Controllers
         {
             cam.ConfigureCameraSettings();
             myCaptureHandler.MyEmguEvent += OnEmguEventCallback;
-            var portConfig = new MMALPortConfig(MMALEncoding.MJPEG,MMALEncoding.I420, 90);
+            var portConfig = new MMALPortConfig(MMALEncoding.MJPEG,MMALEncoding.I420, 30);
             // Create our component pipeline.         
             imgEncoder.ConfigureOutputPort(portConfig, myCaptureHandler);
             cam.Camera.VideoPort.ConnectTo(splitter);

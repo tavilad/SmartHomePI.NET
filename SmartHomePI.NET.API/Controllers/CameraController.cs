@@ -97,7 +97,7 @@ namespace SmartHomePI.NET.API.Controllers
 
                 myCaptureHandler.MyEmguEvent += OnEmguEventCallback;
                 
-                var portConfig = new MMALPortConfig(MMALEncoding.MJPEG, MMALEncoding.I420, 90);
+                var portConfig = new MMALPortConfig(MMALEncoding.MJPEG, MMALEncoding.RGBA, 90);
 
                 // Create our component pipeline.         
                 imgEncoder.ConfigureOutputPort(portConfig, myCaptureHandler);

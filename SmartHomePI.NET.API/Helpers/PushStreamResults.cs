@@ -21,7 +21,7 @@ public class PushStreamResult: IActionResult
     public Task ExecuteResultAsync(ActionContext context)
     {
         var stream = context.HttpContext.Response.Body;
-        context.HttpContext.Response.GetTypedHeaders().ContentType = new MediaTypeHeaderValue(_contentType);
+        context.HttpContext.Response.Headers.Add("ContentType",_contentType);
         _onStreamAvailabe(stream);
         return Task.CompletedTask;
     }

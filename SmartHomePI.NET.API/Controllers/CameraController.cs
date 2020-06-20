@@ -22,7 +22,7 @@ namespace SmartHomePI.NET.API.Controllers
     {
         private Bitmap frame = null;
         private MMALCamera cam;
-        public CameraController()
+        public  CameraController()
         {
             cam = MMALCamera.Instance;
             MMALCameraConfig.Resolution = new Resolution(800, 600);
@@ -46,6 +46,10 @@ namespace SmartHomePI.NET.API.Controllers
                 using (MemoryStream ms = new MemoryStream())
                 {
                     ms.SetLength(0);
+                    if(this.frame == null)
+                    {
+                        continue;
+                    }
                     this.frame.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                     byte[] buffer = ms.GetBuffer();
 

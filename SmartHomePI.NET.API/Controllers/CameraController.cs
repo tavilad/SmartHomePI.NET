@@ -31,9 +31,8 @@ namespace SmartHomePI.NET.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Stream(int channel)
+        public IActionResult Stream(int channel)
         {
-            await Task.Delay(3000);
             var response = new HttpResponseMessage();
             return new PushStreamResult(OnStreamAvailable, "multipart/x-mixed-replace; boundary=frame");
         }

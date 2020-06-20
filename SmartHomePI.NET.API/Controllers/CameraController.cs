@@ -74,36 +74,28 @@ namespace SmartHomePI.NET.API.Controllers
 
         public async Task ChangeVideoEncodingType()
         {
-            using (var vidCaptureHandler = new EmguInMemoryCaptureHandler())
-            using (var splitter = new MMALSplitterComponent())
-            using (var renderer = new MMALNullSinkComponent())
-            {
-                cam.ConfigureCameraSettings();
-                
-                // Register to the event.
-                vidCaptureHandler.MyEmguEvent += this.OnEmguEventCallback;
-
-                // We are instructing the splitter to do a format conversion to BGR24.
-                var splitterPortConfig = new MMALPortConfig(MMALEncoding.MJPEG, MMALEncoding.I420, quality: 90, bitrate: MMALVideoEncoder.MaxBitrateMJPEG);
-
-                // By default in MMALSharp, the Video port outputs using proprietary communication (Opaque) with a YUV420 pixel format.
-                // Changes to this are done via MMALCameraConfig.VideoEncoding and MMALCameraConfig.VideoSubformat.                
-                splitter.ConfigureInputPort(new MMALPortConfig(MMALEncoding.OPAQUE, MMALEncoding.I420), cam.Camera.VideoPort, null);
-
-                // We then use the splitter config object we constructed earlier. We then tell this output port to use our capture handler to record data.
-                splitter.ConfigureOutputPort<SplitterVideoPort>(0, splitterPortConfig, vidCaptureHandler);
-
-                cam.Camera.PreviewPort.ConnectTo(renderer);
-                cam.Camera.VideoPort.ConnectTo(splitter);
-
-                // Camera warm up time
-                await Task.Delay(2000).ConfigureAwait(false);
-
-                // Record for 10 seconds. Increase as required.
-                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(1000));
-
-                await cam.ProcessAsync(cam.Camera.VideoPort, cts.Token);
-            }
+            // By default, video resolution is set to 1920x1080 which will probably be too large for your project. Set as appropriate using MMALCameraConfig.VideoResolution
+        // The default framerate is set to 30fps. You can see what "modes" the different cameras support by looking:
+        // https://github.com/techyian/MMALSharp/wiki/OmniVision-OV5647-Camera-Module
+        // https://github.com/techyian/MMALSharp/wiki/Sony-IMX219-Camera-Module            
+        using (var myCaptureHandler = new EmguInMemoryCaptureHandler())
+        using (var splitter = new MMALSplitterComponent())
+        using (var imgEncoder = new MMALImageEncoder(continuousCapture: true))
+        using (var nullSink = new MMALNullSinkComponent())
+        {
+            cam.ConfigureCameraSettings();
+           var portConfig = new MMALPortConfig(MMALEncoding.JPEG,MMALEncoding.I420, 90);
+            // Create our component pipeline.         
+            imgEncoder.ConfigureOutputPort(portConfig, myCaptureHandler);
+            cam.Camera.VideoPort.ConnectTo(splitter);
+            splitter.Outputs[0].ConnectTo(imgEncoder);
+            cam.Camera.PreviewPort.ConnectTo(nullSink);
+            // Camera warm up time
+            await Task.Delay(2000);
+            CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(15));
+            // Process images for 15 seconds.        
+            await cam.ProcessAsync(cam.Camera.VideoPort, cts.Token);
+        }
         }
 
     public class EmguEventArgs : EventArgs

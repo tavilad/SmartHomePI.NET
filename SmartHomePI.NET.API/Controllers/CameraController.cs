@@ -29,9 +29,11 @@ namespace SmartHomePI.NET.API.Controllers
             cam.ConfigureCameraSettings();
             this.ChangeVideoEncodingType();
         }
+
         [HttpGet]
-        public IActionResult Stream(int channel)
+        public async Task<IActionResult> Stream(int channel)
         {
+            await Task.Delay(3000);
             var response = new HttpResponseMessage();
             return new PushStreamResult(OnStreamAvailable, "multipart/x-mixed-replace; boundary=frame");
         }

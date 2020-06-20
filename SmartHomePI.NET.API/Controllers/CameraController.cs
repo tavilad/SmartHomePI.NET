@@ -33,7 +33,7 @@ namespace SmartHomePI.NET.API.Controllers
         public IActionResult Stream(int channel)
         {
             var response = new HttpResponseMessage();
-            return new PushStreamResult(OnStreamAvailable, "multipart/x-mixed-replace; boundary=--frame");
+            return new PushStreamResult(OnStreamAvailable, "multipart/x-mixed-replace; boundary=frame");
         }
 
         private void OnStreamAvailable(Stream stream)

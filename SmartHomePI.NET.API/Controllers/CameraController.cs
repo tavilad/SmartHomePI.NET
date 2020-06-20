@@ -89,7 +89,7 @@ namespace SmartHomePI.NET.API.Controllers
                 myCaptureHandler.MyEmguEvent += this.OnEmguEventCallback;
 
                 // We are instructing the splitter to do a format conversion to BGR24.
-                var splitterPortConfig = new MMALPortConfig(MMALEncoding.MJPEG, MMALEncoding.I420, 0, 0, null);
+                var splitterPortConfig = new MMALPortConfig(MMALEncoding.MJPEG, MMALEncoding.MJPEG, 0, 0, null);
 
                 // By default in MMALSharp, the Video port outputs using proprietary communication (Opaque) with a YUV420 pixel format.
                 // Changes to this are done via MMALCameraConfig.VideoEncoding and MMALCameraConfig.VideoSubformat.                

@@ -76,9 +76,9 @@ namespace SmartHomePI.NET.API.Controllers
         {
              MMALCameraConfig.Resolution = new Resolution(800, 600);
             // By default, video resolution is set to 1920x1080 which will probably be too large for your project. Set as appropriate using MMALCameraConfig.VideoResolution
-        // The default framerate is set to 30fps. You can see what "modes" the different cameras support by looking:
-        // https://github.com/techyian/MMALSharp/wiki/OmniVision-OV5647-Camera-Module
-        // https://github.com/techyian/MMALSharp/wiki/Sony-IMX219-Camera-Module            
+            // The default framerate is set to 30fps. You can see what "modes" the different cameras support by looking:
+            // https://github.com/techyian/MMALSharp/wiki/OmniVision-OV5647-Camera-Module
+            // https://github.com/techyian/MMALSharp/wiki/Sony-IMX219-Camera-Module            
             using (var myCaptureHandler = new EmguInMemoryCaptureHandler())
             using (var splitter = new MMALSplitterComponent())
             using (var renderer = new MMALNullSinkComponent())
@@ -89,7 +89,7 @@ namespace SmartHomePI.NET.API.Controllers
                 myCaptureHandler.MyEmguEvent += this.OnEmguEventCallback;
 
                 // We are instructing the splitter to do a format conversion to BGR24.
-                var splitterPortConfig = new MMALPortConfig(MMALEncoding.MJPEG, MMALEncoding.MJPEG, width: 800, height: 600);
+                var splitterPortConfig = new MMALPortConfig(MMALEncoding.I420, MMALEncoding.I420, width: 800, height: 600);
 
                 // By default in MMALSharp, the Video port outputs using proprietary communication (Opaque) with a YUV420 pixel format.
                 // Changes to this are done via MMALCameraConfig.VideoEncoding and MMALCameraConfig.VideoSubformat.                

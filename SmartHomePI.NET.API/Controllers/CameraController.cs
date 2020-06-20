@@ -78,7 +78,9 @@ namespace SmartHomePI.NET.API.Controllers
             using (var vidEncoder = new MMALVideoEncoder())
             using (var renderer = new MMALVideoRenderer())
             {
-                cam.ConfigureCameraSettings();   
+                cam.ConfigureCameraSettings(); 
+
+                vidCaptureHandler.MyEmguEvent += this.OnEmguEventCallback;  
 
                 // Camera warm up time
                 await Task.Delay(2000);                   

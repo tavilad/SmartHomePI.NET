@@ -1,24 +1,31 @@
 <div class="container h-100" style="margin-top: 12%;">
   <div class="row h-100 justify-content-center align-items-center">
-    <form #registerForm="ngForm">
+    <form #userDetailsForm="ngForm" (ngSubmit)="createUserDetails()">
       <h2 class="text-center text-primary">Edit your profile details</h2>
       <hr>
-    
+
       <div class="row h-100 justify-content-center align-items-center">
         <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
-          <mat-error *ngIf="emailFormControl.hasError('email')">
-            Please enter a valid email address
-          </mat-error>
-        </mat-form-field> 
+          <mat-label>First Name</mat-label>
+          <input matInput name="firstName" [(ngModel)]="model.FirstName" placeholder="First Name">
+        </mat-form-field>
+      </div>
+
+      <div class="row h-100 justify-content-center align-items-center">
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput name="lastName" [(ngModel)]="model.LastName" placeholder="Last Name">
+        </mat-form-field>
       </div>
     
       <div class="row h-100 justify-content-center align-items-center">
         <mat-form-field appearance="outline">
-          <mat-label>Address</mat-label>
-          <input matInput name="password" placeholder="Address">
-        </mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput [formControl]="emailFormControl" [(ngModel)]="model.Email" placeholder="Ex. pat@example.com">
+          <mat-error *ngIf="emailFormControl.hasError('email')">
+            Please enter a valid email address
+          </mat-error>
+        </mat-form-field> 
       </div>
     
       <div class="row h-100 justify-content-center align-items-center"> 

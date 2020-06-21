@@ -51,6 +51,8 @@ namespace SmartHomePI.NET.API
 
             services.AddScoped<IUserDetailsRepository, UserDetailsRepository>();
 
+            services.AddScoped<ITemperatureAndHumidityRepository, TemperatureAndHumidityRepository>();
+
             services.AddTransient<IMailService, MailService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

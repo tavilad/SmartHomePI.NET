@@ -100,9 +100,10 @@ namespace SmartHomePI.NET.API.Controllers
 
                 // Create our component pipeline.         
                 imgEncoder.ConfigureOutputPort(portConfig, myCaptureHandler);
-                        
+                
+                splitter.Outputs[0].ConnectTo(imgEncoder);   
                 cam.Camera.VideoPort.ConnectTo(splitter);
-                splitter.Outputs[0].ConnectTo(imgEncoder);                    
+                 
                 cam.Camera.PreviewPort.ConnectTo(nullSink);
                 
                 // Camera warm up time

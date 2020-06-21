@@ -71,11 +71,6 @@ namespace SmartHomePI.NET.API.Controllers
             using (var ms = new MemoryStream(args.ImageData))
             {
                 this.frame = new Bitmap(ms);
-                if(saveOnce)
-                {
-                    this.frame.Save("test", ImageFormat.Jpeg);
-                    saveOnce = false;
-                }
             }
         }
 
@@ -105,9 +100,6 @@ namespace SmartHomePI.NET.API.Controllers
                 cam.Camera.VideoPort.ConnectTo(splitter);
                  
                 cam.Camera.PreviewPort.ConnectTo(nullSink);
-                
-                // Camera warm up time
-                await Task.Delay(2000);
                         
                 CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(15000));
                 

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Iot.Device.DHTxx;
 using Iot.Units;
@@ -23,15 +25,17 @@ namespace SmartHomePI.NET.API.Controllers
 
         private readonly ITemperatureAndHumidityRepository repository;
         private readonly DataContext context;
+        private IMailService mailService;
 
-        public TemperatureController(ITemperatureAndHumidityRepository repository, DataContext context)
+        public TemperatureController(ITemperatureAndHumidityRepository repository, DataContext context, IMailService mailService)
         {
             this.context = context;
             this.repository = repository;
+            this.mailService = mailService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTemperature(int roomId)
+        public async Task<IActionResult> GetTemperature()
         {
             if (devEnv)
             {
@@ -81,6 +85,23 @@ namespace SmartHomePI.NET.API.Controllers
                     });
                 }
             }
+        }
+
+        [HttpGet("Report/{userName}/{room}")]
+        public async Task<IActionResult> SendReport(string userName, string room)
+        {
+            IEnumerable<TemperatureAndHumidity> data = await this.repository.Get(temp => temp.DayOfReading == DateTime.Today, null, "");
+            double averageTemperature = data.Average(temp => temp.Temperature);
+            double averageHumidity = data.Average(hum => hum.Humidity);
+            Console.WriteLine("report");
+            await this.mailService.SendMailAsync(new MailRequest()
+            {
+                ToEmail = "pintiliciucoctavian@gmail.com",
+                Subject = $"Room report for {DateTime.Today.Date}",
+                Body = $"Hello {userName}! Here is your report for today for the room {room}: Temperature average - {averageTemperature}, Humidity average - {averageHumidity}."
+            });
+
+            return Ok();
         }
     }
 }

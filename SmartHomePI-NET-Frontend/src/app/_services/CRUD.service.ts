@@ -39,4 +39,8 @@ export class CrudService {
     return this.http.delete(this.baseUrl + tableName  + '/DeleteByName/' + roomName + '/' + userId);
   }
 
+  getReport(user: string, room: string) {
+    return this.http.get(this.baseUrl + 'temperature/Report/' + user + '/' + room);
+  }
+
 }

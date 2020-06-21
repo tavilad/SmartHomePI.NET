@@ -1,2 +1,9 @@
-<p>Room {{selectedRoom.roomName}}</p>
+<div class="container h-100" style="margin-top: 12%;">
+    <div class="row h-100 justify-content-center align-items-center">
+        <h1>Room {{selectedRoom.roomName}}</h1>
+        <button color="primary" mat-raised-button (click)="getReport()">
+            Get todays room report.
+        </button>
+    </div>
+</div>
 <app-temperature></app-temperature>

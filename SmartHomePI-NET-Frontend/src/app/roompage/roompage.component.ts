@@ -33,4 +33,9 @@ export class RoompageComponent implements OnInit {
     });
   }
 
+  getReport() {
+    this.crudService.getReport(this.authService.decodedToken.unique_name, this.selectedRoom.roomName)
+    .subscribe(() => console.log('sent report'));
+  }
+
 }

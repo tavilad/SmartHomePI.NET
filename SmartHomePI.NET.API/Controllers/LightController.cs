@@ -1,4 +1,5 @@
 using System.Device.Gpio;
+using System.Threading;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SmartHomePI.NET.API.Controllers
@@ -13,12 +14,12 @@ namespace SmartHomePI.NET.API.Controllers
         public LightController()
         {
             this.controller = new GpioController();
-            this.controller.OpenPin(PIN, PinMode.Output);
         }
 
         [HttpGet("LightOn")]
         public IActionResult TurnOnLight()
         {
+            this.controller.OpenPin(PIN, PinMode.Output);
             this.controller.Write(PIN,PinValue.High);
             return Ok();
         }
@@ -27,6 +28,7 @@ namespace SmartHomePI.NET.API.Controllers
         public IActionResult TurnOffLight()
         {
             this.controller.Write(PIN,PinValue.Low);
+            this.controller.ClosePin(PIN);
             return Ok();
         }
     }

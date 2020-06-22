@@ -4,6 +4,11 @@
     <mat-label>Room Name</mat-label>
     <input matInput type="text" name="roomName" placeholder="Room Name" required [(ngModel)]="data.roomName">
   </mat-form-field>
+  <p>Use command <b>hostname -I</b> on the Raspberry</p>
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>Raspberry Pi IP. Use command hostname -I</mat-label>
+    <input matInput type="text" name="ipAddress" placeholder="eg: 192.168.0.132" required [(ngModel)]="data.ipAddress">
+  </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button color="primary" [mat-dialog-close]="data.roomName" cdkFocusInitial>Ok</button>

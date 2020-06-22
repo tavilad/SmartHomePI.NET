@@ -14,6 +14,7 @@ export interface Tile {
 
 export interface DialogData {
   roomName: string;
+  ipAddress: string;
 }
 
 @Component({
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
   tiles: Tile[] = [];
 
   roomName: string;
+  ipAddress: string;
   model: any = {};
   rooms: Observable<any>;
 
@@ -40,7 +42,7 @@ export class DashboardComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px', data : {roomName : this.roomName}
+      width: '250px', data : {roomName : this.roomName, ipAddress : this.ipAddress}
     });
 
     dialogRef.afterClosed().subscribe(result => {

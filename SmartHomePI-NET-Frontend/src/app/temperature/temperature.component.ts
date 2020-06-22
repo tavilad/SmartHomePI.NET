@@ -28,7 +28,7 @@ export class TemperatureComponent implements OnInit {
         delay: 2000,
         duration: 50000,
         frameRate: 30,
-        refresh: 1000,
+        refresh: 2000,
         onRefresh: function(chart: any) {
           this.http.get(this.baseUrl).subscribe((reading) => {
             chart.data.datasets[0].data.push({x: Date.now(), y: reading.temperature});

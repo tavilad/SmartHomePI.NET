@@ -8,7 +8,7 @@
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{tile.text}}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+      <img mat-card-image src="http://192.168.0.137:8000/stream.mjpg">
       <mat-card-actions>
         <button mat-raised-button color="primary" class="mr-2" [routerLink]="['/roompage',tiles.indexOf(tile)]">Open Room</button>
         <button mat-raised-button color="primary" (click)="removeRoom(tile.text)">Remove Room</button>

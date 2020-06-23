@@ -114,7 +114,7 @@ namespace SmartHomePI.NET.API.Controllers
                 // Camera warm up time
                 await Task.Delay(2000);
 
-                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(15));
+                var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(1));
 
                 // Process images for 15 seconds.        
                 await cam.ProcessAsync(cam.Camera.VideoPort, cts.Token);
@@ -179,43 +179,6 @@ namespace SmartHomePI.NET.API.Controllers
             stream.Write(imageData, 0, imageData.Length);
             stream.Write(footer, 0, footer.Length);
         }
-
-        /// <summary>
-        /// While the MJPEGStream is running and clients are connected,
-        /// continue sending frames.
-        /// </summary>
-        /// <param name="stream">Stream to write to.</param>
-        /// <param name="httpContent">The content information</param>
-        /// <param name="transportContext"></param>
-        // private void StartStream(Stream stream, HttpContent httpContent, TransportContext transportContext)
-        // {
-        //     while (mjpegStream.IsRunning && HttpContext.Current.Response.IsClientConnected)
-        //     {
-        //         if (frameAvailable)
-        //         {
-        //             try
-        //             {
-        //                 WriteFrame(stream, frame);
-        //                 frameAvailable = false;
-        //             }
-        //             catch (Exception e)
-        //             {
-        //                 System.Diagnostics.Debug.WriteLine(e);
-        //             }
-        //         }
-        //         else
-        //         {
-        //             Thread.Sleep(30);
-        //         }
-        //     }
-        //     stopStream();
-        // }
-
-        // private void stopStream()
-        // {
-        //     System.Diagnostics.Debug.WriteLine("Stop stream");
-        //     mjpegStream.Stop();
-        // }
 
         public class EmguEventArgs : EventArgs
         {

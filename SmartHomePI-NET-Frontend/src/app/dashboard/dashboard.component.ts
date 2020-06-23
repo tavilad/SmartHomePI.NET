@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AlertifyService } from '../_services/alertify.service';
 import { CrudService } from '../_services/CRUD.service';
 import { AuthService } from '../_services/auth.service';
@@ -11,7 +11,7 @@ export interface Tile {
   text: string;
   border: string;
   roomId: number;
- }
+}
 
 export interface DialogData {
   roomName: string;
@@ -34,16 +34,20 @@ export class DashboardComponent implements OnInit {
   rooms: Observable<any>;
 
   constructor(public dialog: MatDialog, private alertify: AlertifyService,
-              private crudService: CrudService, private authService: AuthService) {
-               }
+    private crudService: CrudService, private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.initRooms();
   }
 
+  public getLinkPicture() {
+    return 'http://raspberrypi:8080/api/camera/Stream' + '?' + new Date().getTime();
+  }
+
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px', data : {roomName : this.roomName, ipAddress : this.ipAddress}
+      width: '250px', data: { roomName: this.roomName, ipAddress: this.ipAddress }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -56,7 +60,7 @@ export class DashboardComponent implements OnInit {
         console.log(this.model);
         this.crudService.create(this.model, 'room').subscribe(() => {
           this.alertify.success('Created room ' + this.model.roomName);
-          this.tiles.push({text: this.model.roomName, cols: 1, rows: 1 , border: '', roomId: this.model.id});
+          this.tiles.push({ text: this.model.roomName, cols: 1, rows: 1, border: '', roomId: this.model.id });
         }, error => {
           this.alertify.error(error);
         });
@@ -67,14 +71,14 @@ export class DashboardComponent implements OnInit {
   initRooms() {
     // tslint:disable-next-line: radix
     this.crudService.getForUserId(parseInt(this.authService.decodedToken.nameid), 'room')
-    .subscribe((rooms) => {
-      // tslint:disable-next-line: no-string-literal
-      this.rooms = rooms['roomList'];
-      console.log(this.rooms);
-      this.rooms.forEach((room) => {
-        this.tiles.push({text: room.roomName, cols: 1, rows: 1 , border: '', roomId: this.model.id});
+      .subscribe((rooms) => {
+        // tslint:disable-next-line: no-string-literal
+        this.rooms = rooms['roomList'];
+        console.log(this.rooms);
+        this.rooms.forEach((room) => {
+          this.tiles.push({ text: room.roomName, cols: 1, rows: 1, border: '', roomId: this.model.id });
+        });
       });
-    });
   }
 
   removeRoom(selectedRoomId: string) {
@@ -99,7 +103,7 @@ export class DialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   onNoClick(): void {
     this.dialogRef.close();

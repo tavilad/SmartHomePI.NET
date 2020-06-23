@@ -1,8 +1,18 @@
 <div class="row h-100 justify-content-center align-items-center">
   <h1>Room {{ selectedRoom.roomName }}</h1>
+  <h1>Room id {{ selectedRoom.roomId }}</h1>
+</div>
+
+<div class="row h-100 justify-content-center align-items-center">
   <button color="primary" mat-raised-button (click)="getReport()">
-    Get todays room report.
+    Get room report for today
   </button>
+</div>
+
+<div class="row h-100 justify-content-center align-items-center">
+  <h1>Control the lights</h1>
+  <mat-slide-toggle (change)="controlLight($event)" [checked]="lightOn">
+  </mat-slide-toggle>
 </div>
 
 <app-temperature></app-temperature>

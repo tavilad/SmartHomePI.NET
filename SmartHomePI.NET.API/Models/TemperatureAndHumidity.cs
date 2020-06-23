@@ -10,6 +10,8 @@ namespace SmartHomePI.NET.API.Models
 
         public double Humidity { get; set; }
 
-        public DateTime DayOfReading {get;set;}
+        public DateTime DayOfReading { get; set; }
+
+        public int RoomId { get; set; }
     }
 }

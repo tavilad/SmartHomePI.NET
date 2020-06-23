@@ -19,23 +19,37 @@ export class RoompageComponent implements OnInit {
   rooms: Observable<any>;
   public selectedRoom: any;
 
+  lightOn: boolean;
+
   ngOnInit(): void {
     this.roomIndex = this.activatedRoute.snapshot.paramMap.get('id');
 
     console.log(this.roomIndex);
 
     this.crudService.getForUserId(parseInt(this.authService.decodedToken.nameid), 'room')
-    .subscribe((rooms) => {
-      // tslint:disable-next-line: no-string-literal
-      this.rooms = rooms['roomList'];
-      console.log(this.rooms);
-      this.selectedRoom = this.rooms[this.roomIndex];
-    });
+      .subscribe((rooms) => {
+        // tslint:disable-next-line: no-string-literal
+        this.rooms = rooms['roomList'];
+        console.log(this.rooms);
+        this.selectedRoom = this.rooms[this.roomIndex];
+      });
   }
 
   getReport() {
     this.crudService.getReport(this.authService.decodedToken.unique_name, this.selectedRoom.roomName)
-    .subscribe(() => console.log('sent report'));
+      .subscribe(() => console.log('sent report'));
   }
 
+  controlLight(e) {
+    if (!this.lightOn) {
+      this.crudService.turnOnLight().subscribe(() => console.log('on'));
+
+      this.lightOn = true;
+    } else {
+      this.crudService.turnOffLight().subscribe(() => console.log('off'));
+      this.lightOn = false;
+    }
+  }
 }
+
+

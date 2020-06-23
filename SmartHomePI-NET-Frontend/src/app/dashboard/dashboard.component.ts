@@ -10,6 +10,7 @@ export interface Tile {
   rows: number;
   text: string;
   border: string;
+  roomId: number;
  }
 
 export interface DialogData {
@@ -51,10 +52,11 @@ export class DashboardComponent implements OnInit {
         // tslint:disable-next-line: radix
         this.model.userId = parseInt(this.authService.decodedToken.nameid);
         this.model.roomName = result;
+        this.model.IpAddress = this.ipAddress;
         console.log(this.model);
         this.crudService.create(this.model, 'room').subscribe(() => {
           this.alertify.success('Created room ' + this.model.roomName);
-          this.tiles.push({text: this.model.roomName, cols: 1, rows: 1 , border: ''});
+          this.initRooms();
         }, error => {
           this.alertify.error(error);
         });
@@ -70,7 +72,7 @@ export class DashboardComponent implements OnInit {
       this.rooms = rooms['roomList'];
       console.log(this.rooms);
       this.rooms.forEach((room) => {
-        this.tiles.push({text: room.roomName, cols: 1, rows: 1 , border: ''});
+        this.tiles.push({text: room.roomName, cols: 1, rows: 1 , border: '', roomId: this.model.id});
       });
     });
   }

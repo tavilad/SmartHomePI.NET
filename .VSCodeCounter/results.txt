@@ -1,0 +1,184 @@
+Date : 2020-06-23 14:33:27
+Directory : e:\dev\SmartHomePI.NET
+Total : 123 files,  18480 codes, 153 comments, 612 blanks, all 19245 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |         10 |     15,698 |         19 |          8 |     15,725 |
+| C#         |         38 |      1,402 |         15 |        274 |      1,691 |
+| TypeScript |         44 |      1,001 |         97 |        255 |      1,353 |
+| HTML       |         13 |        212 |          0 |         39 |        251 |
+| CSS        |         12 |         69 |         13 |         14 |         96 |
+| JavaScript |          2 |         53 |          8 |          4 |         65 |
+| XML        |          1 |         20 |          0 |          0 |         20 |
+| Markdown   |          2 |         15 |          0 |         15 |         30 |
+| Properties |          1 |         10 |          1 |          3 |         14 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                   |        123 |     18,480 |        153 |        612 |     19,245 |
+| SmartHomePI-NET-Frontend                                                                            |         81 |     17,011 |        138 |        335 |     17,484 |
+| SmartHomePI-NET-Frontend\e2e                                                                        |          4 |         64 |          7 |         11 |         82 |
+| SmartHomePI-NET-Frontend\e2e\src                                                                    |          2 |         27 |          1 |          8 |         36 |
+| SmartHomePI-NET-Frontend\src                                                                        |         67 |      1,255 |        109 |        300 |      1,664 |
+| SmartHomePI-NET-Frontend\src\app                                                                    |         59 |      1,204 |         38 |        279 |      1,521 |
+| SmartHomePI-NET-Frontend\src\app\_animations                                                        |          4 |         37 |          8 |         12 |         57 |
+| SmartHomePI-NET-Frontend\src\app\_guards                                                            |          1 |         18 |          0 |          3 |         21 |
+| SmartHomePI-NET-Frontend\src\app\_services                                                          |          7 |        176 |          3 |         45 |        224 |
+| SmartHomePI-NET-Frontend\src\app\camera                                                             |          4 |         37 |          1 |         14 |         52 |
+| SmartHomePI-NET-Frontend\src\app\dashboard                                                          |          5 |        195 |         16 |         35 |        246 |
+| SmartHomePI-NET-Frontend\src\app\home                                                               |          4 |         73 |          1 |         21 |         95 |
+| SmartHomePI-NET-Frontend\src\app\login                                                              |          4 |         76 |          0 |         17 |         93 |
+| SmartHomePI-NET-Frontend\src\app\nav                                                                |          4 |         70 |          1 |         16 |         87 |
+| SmartHomePI-NET-Frontend\src\app\profile                                                            |          4 |         84 |          2 |         20 |        106 |
+| SmartHomePI-NET-Frontend\src\app\register                                                           |          4 |         70 |          2 |         19 |         91 |
+| SmartHomePI-NET-Frontend\src\app\roompage                                                           |          4 |         75 |          1 |         25 |        101 |
+| SmartHomePI-NET-Frontend\src\app\settings                                                           |          4 |         33 |          1 |         14 |         48 |
+| SmartHomePI-NET-Frontend\src\app\temperature                                                        |          4 |         84 |          1 |         20 |        105 |
+| SmartHomePI-NET-Frontend\src\environments                                                           |          2 |          6 |         11 |          4 |         21 |
+| SmartHomePI.NET.API                                                                                 |         41 |      1,468 |         15 |        276 |      1,759 |
+| SmartHomePI.NET.API\Controllers                                                                     |          5 |        380 |          8 |         60 |        448 |
+| SmartHomePI.NET.API\DTOs                                                                            |          3 |         40 |          0 |          9 |         49 |
+| SmartHomePI.NET.API\Data                                                                            |         13 |        324 |          0 |         58 |        382 |
+| SmartHomePI.NET.API\Data\Interfaces                                                                 |          6 |         63 |          0 |         12 |         75 |
+| SmartHomePI.NET.API\Helpers                                                                         |          2 |         38 |          0 |          4 |         42 |
+| SmartHomePI.NET.API\Migrations                                                                      |          7 |        441 |          4 |        114 |        559 |
+| SmartHomePI.NET.API\Models                                                                          |          5 |         58 |          0 |          6 |         64 |
+| SmartHomePI.NET.API\Properties                                                                      |          1 |         30 |          0 |          1 |         31 |
+| SmartHomePI.NET.API\Settings                                                                        |          1 |         11 |          0 |          0 |         11 |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                            | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| e:\dev\SmartHomePI.NET\README.md                                                                    | Markdown   |          1 |          0 |          1 |          2 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\.editorconfig                                       | Properties |         10 |          1 |          3 |         14 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\README.md                                           | Markdown   |         14 |          0 |         14 |         28 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\angular.json                                        | JSON       |        105 |         19 |          0 |        124 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\e2e\protractor.conf.js                              | JavaScript |         24 |          6 |          2 |         32 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\e2e\src\app.e2e-spec.ts                             | TypeScript |         18 |          1 |          5 |         24 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\e2e\src\app.po.ts                                   | TypeScript |          9 |          0 |          3 |         12 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\e2e\tsconfig.json                                   | JSON       |         13 |          0 |          1 |         14 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\karma.conf.js                                       | JavaScript |         29 |          2 |          2 |         33 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\package-lock.json                                   | JSON       |     15,320 |          0 |          1 |     15,321 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\package.json                                        | JSON       |         59 |          0 |          1 |         60 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\_animations\fade-in.animation.ts            | TypeScript |          8 |          5 |          6 |         19 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\_animations\index.ts                        | TypeScript |          3 |          0 |          1 |          4 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\_animations\routeanimation.ts               | TypeScript |         18 |          0 |          1 |         19 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\_animations\slide-in-out.animation.ts       | TypeScript |          8 |          3 |          4 |         15 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\_guards\auth.guard.ts                       | TypeScript |         18 |          0 |          3 |         21 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\_services\CRUD.service.spec.ts              | TypeScript |         12 |          1 |          4 |         17 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\_services\CRUD.service.ts                   | TypeScript |         40 |          0 |         15 |         55 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\_services\alertify.service.spec.ts          | TypeScript |         12 |          1 |          4 |         17 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\_services\alertify.service.ts               | TypeScript |         28 |          0 |          7 |         35 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\_services\auth.service.spec.ts              | TypeScript |         12 |          1 |          4 |         17 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\_services\auth.service.ts                   | TypeScript |         32 |          0 |          6 |         38 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\_services\error.interceptor.ts              | TypeScript |         40 |          0 |          5 |         45 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\app.component.css                           | CSS        |          6 |          0 |          0 |          6 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\app.component.html                          | HTML       |          6 |          0 |          2 |          8 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\app.component.spec.ts                       | TypeScript |         27 |          0 |          5 |         32 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\app.component.ts                            | TypeScript |         26 |          1 |          5 |         32 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\app.module.ts                               | TypeScript |         86 |          0 |          4 |         90 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\camera\camera.component.css                 | CSS        |          0 |          0 |          1 |          1 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\camera\camera.component.html                | HTML       |          3 |          0 |          1 |          4 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\camera\camera.component.spec.ts             | TypeScript |         22 |          1 |          6 |         29 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\camera\camera.component.ts                  | TypeScript |         12 |          0 |          6 |         18 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\dashboard\dashboard.component.css           | CSS        |         48 |         12 |          7 |         67 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\dashboard\dashboard.component.html          | HTML       |         24 |          0 |          3 |         27 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\dashboard\dashboard.component.spec.ts       | TypeScript |         22 |          1 |          6 |         29 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\dashboard\dashboard.component.ts            | TypeScript |         85 |          3 |         19 |        107 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\dashboard\dialog.html                       | HTML       |         16 |          0 |          0 |         16 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\home\home.component.css                     | CSS        |          0 |          0 |          1 |          1 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\home\home.component.html                    | HTML       |         25 |          0 |          5 |         30 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\home\home.component.spec.ts                 | TypeScript |         22 |          1 |          6 |         29 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\home\home.component.ts                      | TypeScript |         26 |          0 |          9 |         35 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\login\login.component.css                   | CSS        |          0 |          0 |          1 |          1 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\login\login.component.html                  | HTML       |         24 |          0 |          3 |         27 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\login\login.component.spec.ts               | TypeScript |         20 |          0 |          6 |         26 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\login\login.component.ts                    | TypeScript |         32 |          0 |          7 |         39 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\nav\nav.component.css                       | CSS        |          3 |          0 |          0 |          3 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\nav\nav.component.html                      | HTML       |         22 |          0 |          2 |         24 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\nav\nav.component.spec.ts                   | TypeScript |         22 |          1 |          6 |         29 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\nav\nav.component.ts                        | TypeScript |         23 |          0 |          8 |         31 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\profile\profile.component.css               | CSS        |          0 |          0 |          1 |          1 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\profile\profile.component.html              | HTML       |         32 |          0 |          7 |         39 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\profile\profile.component.spec.ts           | TypeScript |         22 |          1 |          6 |         29 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\profile\profile.component.ts                | TypeScript |         30 |          1 |          6 |         37 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\register\register.component.css             | CSS        |          0 |          0 |          1 |          1 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\register\register.component.html            | HTML       |         20 |          0 |          5 |         25 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\register\register.component.spec.ts         | TypeScript |         22 |          1 |          6 |         29 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\register\register.component.ts              | TypeScript |         28 |          1 |          7 |         36 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\roompage\roompage.component.css             | CSS        |          0 |          0 |          1 |          1 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\roompage\roompage.component.html            | HTML       |         14 |          0 |          4 |         18 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\roompage\roompage.component.spec.ts         | TypeScript |         20 |          0 |          6 |         26 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\roompage\roompage.component.ts              | TypeScript |         41 |          1 |         14 |         56 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\routes.ts                                   | TypeScript |         25 |          0 |          2 |         27 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\settings\settings.component.css             | CSS        |          0 |          0 |          1 |          1 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\settings\settings.component.html            | HTML       |          0 |          0 |          2 |          2 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\settings\settings.component.spec.ts         | TypeScript |         22 |          1 |          6 |         29 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\settings\settings.component.ts              | TypeScript |         11 |          0 |          5 |         16 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\temperature\temperature.component.css       | CSS        |          6 |          0 |          0 |          6 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\temperature\temperature.component.html      | HTML       |         11 |          0 |          4 |         15 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\temperature\temperature.component.spec.ts   | TypeScript |         22 |          1 |          6 |         29 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\app\temperature\temperature.component.ts        | TypeScript |         45 |          0 |         10 |         55 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\environments\environment.prod.ts                | TypeScript |          3 |          0 |          1 |          4 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\environments\environment.ts                     | TypeScript |          3 |         11 |          3 |         17 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\index.html                                      | HTML       |         15 |          0 |          1 |         16 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\main.ts                                         | TypeScript |          9 |          0 |          4 |         13 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\polyfills.ts                                    | TypeScript |          1 |         55 |          8 |         64 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\styles.css                                      | CSS        |          6 |          1 |          0 |          7 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\test.ts                                         | TypeScript |         13 |          4 |          4 |         21 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\src\typings.d.ts                                    | TypeScript |          1 |          0 |          0 |          1 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\tsconfig.app.json                                   | JSON       |         18 |          0 |          1 |         19 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\tsconfig.json                                       | JSON       |         27 |          0 |          1 |         28 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\tsconfig.spec.json                                  | JSON       |         18 |          0 |          1 |         19 |
+| e:\dev\SmartHomePI.NET\SmartHomePI-NET-Frontend\tslint.json                                         | JSON       |         92 |          0 |          0 |         92 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Controllers\AuthController.cs                            | C#         |         78 |          0 |         17 |         95 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Controllers\LightController.cs                           | C#         |         31 |          0 |          4 |         35 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Controllers\RoomController.cs                            | C#         |         95 |          4 |         16 |        115 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Controllers\TemperatureController.cs                     | C#         |         97 |          0 |         10 |        107 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Controllers\UserDetailsController.cs                     | C#         |         79 |          4 |         13 |         96 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\DTOs\RoomDTO.cs                                          | C#         |         12 |          0 |          2 |         14 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\DTOs\UserDTO.cs                                          | C#         |         12 |          0 |          3 |         15 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\DTOs\UserDetailsDTO.cs                                   | C#         |         16 |          0 |          4 |         20 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Data\AuthRepository.cs                                   | C#         |         71 |          0 |         16 |         87 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Data\BaseRepository.cs                                   | C#         |         70 |          0 |         16 |         86 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Data\DataContext.cs                                      | C#         |         15 |          0 |          2 |         17 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Data\Interfaces\IAuthRepository.cs                       | C#         |         11 |          0 |          1 |         12 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Data\Interfaces\IBaseRepository.cs                       | C#         |         19 |          0 |          5 |         24 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Data\Interfaces\IMailService.cs                          | C#         |         10 |          0 |          1 |         11 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Data\Interfaces\IRoomRepository.cs                       | C#         |          9 |          0 |          1 |         10 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Data\Interfaces\ITemperatureAndHumidityRepository.cs     | C#         |          7 |          0 |          2 |          9 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Data\Interfaces\IUserDetailsRepository.cs                | C#         |          7 |          0 |          2 |          9 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Data\MailService.cs                                      | C#         |         52 |          0 |          3 |         55 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Data\RoomRepository.cs                                   | C#         |         27 |          0 |          7 |         34 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Data\TemperatureAndHumidityRepository.cs                 | C#         |         13 |          0 |          1 |         14 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Data\UserDetailsRepository.cs                            | C#         |         13 |          0 |          1 |         14 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Helpers\Extensions.cs                                    | C#         |         12 |          0 |          1 |         13 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Helpers\PushStreamResults.cs                             | C#         |         26 |          0 |          3 |         29 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Migrations\20200120185636_AddedUserEntity.Designer.cs    | C#         |         50 |          1 |         12 |         63 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Migrations\20200120185636_AddedUserEntity.cs             | C#         |         30 |          0 |          3 |         33 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Migrations\20200128145718_RoomAndUserDetails.Designer.cs | C#         |         77 |          1 |         24 |        102 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Migrations\20200128145718_RoomAndUserDetails.cs          | C#         |         66 |          0 |          8 |         74 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Migrations\20200621114653_Temperature.Designer.cs        | C#         |         95 |          1 |         30 |        126 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Migrations\20200621114653_Temperature.cs                 | C#         |         30 |          0 |          7 |         37 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Migrations\DataContextModelSnapshot.cs                   | C#         |         93 |          1 |         30 |        124 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Models\MailRequest.cs                                    | C#         |         12 |          0 |          1 |         13 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Models\Room.cs                                           | C#         |         10 |          0 |          0 |         10 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Models\TemperatureAndHumidity.cs                         | C#         |         11 |          0 |          4 |         15 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Models\User.cs                                           | C#         |         13 |          0 |          1 |         14 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Models\UserDetails.cs                                    | C#         |         12 |          0 |          0 |         12 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Program.cs                                               | C#         |         24 |          0 |          3 |         27 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Properties\launchSettings.json                           | JSON       |         30 |          0 |          1 |         31 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Settings\MailSettings.cs                                 | C#         |         11 |          0 |          0 |         11 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\SmartHomePI.NET.API.csproj                               | XML        |         20 |          0 |          0 |         20 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\Startup.cs                                               | C#         |         86 |          3 |         20 |        109 |
+| e:\dev\SmartHomePI.NET\SmartHomePI.NET.API\appsettings.json                                         | JSON       |         16 |          0 |          1 |         17 |
+| Total                                                                                               |            |     18,480 |        153 |        612 |     19,245 |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

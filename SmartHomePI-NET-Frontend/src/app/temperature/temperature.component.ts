@@ -12,13 +12,14 @@ import 'chartjs-plugin-streaming';
 })
 
 export class TemperatureComponent implements OnInit {
-  baseUrl = 'http://localhost:5000/api/temperature';
+  baseUrl = 'http://raspberrypi:8080/api/temperature/';
 
   reading: any = {};
+  roomId: any;
 
   isChartPaused: boolean;
 
-  datasets: any[] = [{label: 'Temperature', data: [] }, { label: 'Humidity', data: [] }];
+  datasets: any[] = [{ label: 'Temperature', data: [] }, { label: 'Humidity', data: [] }];
   options: any = {
     scales: {
       xAxes: [{ type: 'realtime' }]
@@ -29,16 +30,16 @@ export class TemperatureComponent implements OnInit {
         duration: 50000,
         frameRate: 30,
         refresh: 2000,
-        onRefresh: function(chart: any) {
-          this.http.get(this.baseUrl).subscribe((reading) => {
-            chart.data.datasets[0].data.push({x: Date.now(), y: reading.temperature});
-            chart.data.datasets[1].data.push({x: Date.now(), y: reading.humidity});
+        onRefresh: function (chart: any) {
+          this.http.get(this.baseUrl + this.roomId).subscribe((reading) => {
+            chart.data.datasets[0].data.push({ x: Date.now(), y: reading.temperature });
+            chart.data.datasets[1].data.push({ x: Date.now(), y: reading.humidity });
           }
           );
         }.bind(this),
       },
     },
-    tooltips: {mode: 'nearest', intersect: false }, hover: { mode: 'nearest', intersect: false },
+    tooltips: { mode: 'nearest', intersect: false }, hover: { mode: 'nearest', intersect: false },
   };
 
   constructor(private http: HttpClient) { }

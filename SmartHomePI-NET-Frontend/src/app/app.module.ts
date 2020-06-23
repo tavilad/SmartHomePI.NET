@@ -19,6 +19,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -72,7 +73,8 @@ import { ChartsModule } from 'ng2-charts';
       MatDialogModule,
       MatCardModule,
       ReactiveFormsModule,
-      ChartsModule
+      ChartsModule,
+      MatSlideToggleModule
    ],
    providers: [
       AuthService,
@@ -84,4 +86,4 @@ import { ChartsModule } from 'ng2-charts';
       AppComponent
    ],
 })
-export class AppModule {}
+export class AppModule { }

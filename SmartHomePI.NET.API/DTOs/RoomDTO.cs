@@ -10,5 +10,11 @@ namespace SmartHomePI.NET.API.DTOs
 
         [Required]
         public int userId { get; set; }
+
+        [Required]
+        public string IpAddress { get; set; }
+
+        [Required]
+        public int Id { get; set; }
     }
 }

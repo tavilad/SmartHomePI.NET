@@ -29,7 +29,8 @@ namespace SmartHomePI.NET.API.Controllers
             await this.repository.Insert(new Room
             {
                 RoomName = room.RoomName,
-                user = await this.context.Users.FindAsync(room.userId)
+                user = await this.context.Users.FindAsync(room.userId),
+                IpAddress = room.IpAddress         
             });
 
             return StatusCode(201);
@@ -46,7 +47,9 @@ namespace SmartHomePI.NET.API.Controllers
                 roomsToReturn.Add(new RoomDTO
                 {
                     RoomName = room.RoomName,
-                    userId = room.user.Id
+                    userId = room.user.Id,
+                    IpAddress = room.IpAddress,
+                    Id = room.Id                  
                 });
             }
 
@@ -65,7 +68,9 @@ namespace SmartHomePI.NET.API.Controllers
                 return Ok(new
                 {
                     RoomName = roomToReturn.RoomName,
-                    userId = roomToReturn.user.Id
+                    userId = roomToReturn.user.Id,
+                    IpAddress = roomToReturn.IpAddress,
+                    Id = roomId
                 });
             }
             else

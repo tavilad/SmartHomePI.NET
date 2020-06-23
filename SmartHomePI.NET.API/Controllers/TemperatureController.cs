@@ -35,7 +35,7 @@ namespace SmartHomePI.NET.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTemperature()
+        public async Task<IActionResult> GetTemperature(int roomId)
         {
             if (devEnv)
             {
@@ -46,7 +46,8 @@ namespace SmartHomePI.NET.API.Controllers
                 {
                     Temperature = temperature,
                     Humidity = humidity,
-                    DayOfReading = DateTime.Today
+                    DayOfReading = DateTime.Today,
+                    RoomId = roomId
                 });
 
                 return Ok(new
@@ -67,7 +68,8 @@ namespace SmartHomePI.NET.API.Controllers
                     {
                         Temperature = temperature.Celsius,
                         Humidity = humidity,
-                        DayOfReading = DateTime.Today
+                        DayOfReading = DateTime.Today,
+                        RoomId = roomId
                     });
 
                     return Ok(new
@@ -88,9 +90,9 @@ namespace SmartHomePI.NET.API.Controllers
         }
 
         [HttpGet("Report/{userName}/{room}")]
-        public async Task<IActionResult> SendReport(string userName, string room)
+        public async Task<IActionResult> SendReport(string userName, int roomId)
         {
-            IEnumerable<TemperatureAndHumidity> data = await this.repository.Get(temp => temp.DayOfReading == DateTime.Today, null, "");
+            IEnumerable<TemperatureAndHumidity> data = await this.repository.Get(temp => temp.DayOfReading == DateTime.Today && temp.RoomId == roomId, null, "");
             double averageTemperature = data.Average(temp => temp.Temperature);
             double averageHumidity = data.Average(hum => hum.Humidity);
             Console.WriteLine("report");
@@ -98,7 +100,7 @@ namespace SmartHomePI.NET.API.Controllers
             {
                 ToEmail = "pintiliciucoctavian@gmail.com",
                 Subject = $"Room report for {DateTime.Today.Date}",
-                Body = $"Hello {userName}! Here is your report for today for the room {room}: Temperature average - {averageTemperature}, Humidity average - {averageHumidity}."
+                Body = $"Hello {userName}! Here is your report for today for the room {roomId}: Temperature average - {averageTemperature}, Humidity average - {averageHumidity}."
             });
 
             return Ok();

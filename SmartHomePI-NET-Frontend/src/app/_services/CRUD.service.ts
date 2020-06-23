@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CrudService {
-  baseUrl = 'http://localhost:5000/api/';
+  baseUrl = 'http://raspberrypi:8080/api/';
 
   constructor(private http: HttpClient, private alertify: AlertifyService) { }
 
@@ -41,6 +41,14 @@ export class CrudService {
 
   getReport(user: string, room: string) {
     return this.http.get(this.baseUrl + 'temperature/Report/' + user + '/' + room);
+  }
+
+  turnOnLight() {
+    return this.http.get('http://raspberrypi:8080/api/light/lighton');
+  }
+
+  turnOffLight() {
+    return this.http.get('http://raspberrypi:8080/api/light/lightoff');
   }
 
 }

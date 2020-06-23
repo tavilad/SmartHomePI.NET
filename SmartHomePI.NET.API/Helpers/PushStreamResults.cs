@@ -9,10 +9,10 @@ namespace SmartHomePI.NET.API.Helpers
 {
 public class PushStreamResult: IActionResult
 {
-    private readonly Action<Stream> _onStreamAvailabe;
+    private readonly Func<Stream, Task> _onStreamAvailabe;
     private readonly string _contentType;
 
-    public PushStreamResult(Action<Stream> onStreamAvailabe, string contentType)
+    public PushStreamResult(Func<Stream, Task> onStreamAvailabe, string contentType)
     {
         _onStreamAvailabe = onStreamAvailabe;
         _contentType = contentType;

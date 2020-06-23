@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -36,11 +37,10 @@ namespace SmartHomePI.NET.API.Controllers
         [HttpGet("stream")]
         public IActionResult Stream()
         {
-            var response = new HttpResponseMessage();
-            return new PushStreamResult(OnStreamAvailable, "multipart/x-mixed-replace; boundary=frame");
+            return new PushStreamResult(OnStreamAvailableAsync, "multipart/x-mixed-replace; boundary=frame");    
         }
 
-        private void OnStreamAvailable(Stream stream)
+        private async Task OnStreamAvailableAsync(Stream stream)
         {
             StreamWriter writer = new StreamWriter(stream);
             while (true)
@@ -57,13 +57,13 @@ namespace SmartHomePI.NET.API.Controllers
                     this.frame.Save(ms, ImageFormat.Jpeg);
                     byte[] buffer = ms.GetBuffer();
 
-                    writer.WriteLine("--frame");
-                    writer.WriteLine("Content-Type: image/jpeg");
-                    writer.WriteLine(string.Format("Content-length: {0}", buffer.Length));
-                    writer.WriteLine();
-                    writer.Write(buffer);
+                    await writer.WriteLineAsync("--frame");
+                    await writer.WriteLineAsync("Content-Type: image/jpeg");
+                    await writer.WriteLineAsync(string.Format("Content-length: {0}", buffer.Length));
+                    await writer.WriteLineAsync();
+                    await writer.WriteAsync(Encoding.Unicode.GetString(buffer, 0, buffer.Length));
 
-                    writer.Flush();
+                    await writer.FlushAsync();
                 }
             }
         }

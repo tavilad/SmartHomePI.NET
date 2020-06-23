@@ -21,6 +21,9 @@ public class PushStreamResult: IActionResult
     public Task ExecuteResultAsync(ActionContext context)
     {
         var stream = context.HttpContext.Response.Body;
+        context.HttpContext.Response.Headers.Add("Age","0");
+        context.HttpContext.Response.Headers.Add("Cache-Control","no-cache, private");
+        context.HttpContext.Response.Headers.Add("Pragma", "no-cache");
         context.HttpContext.Response.Headers.Add("ContentType",_contentType);
         _onStreamAvailabe(stream);
         return Task.CompletedTask;

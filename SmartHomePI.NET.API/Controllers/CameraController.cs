@@ -94,18 +94,19 @@ namespace SmartHomePI.NET.API.Controllers
 
                 myCaptureHandler.MyEmguEvent += OnEmguEventCallback;
 
-                var portConfig = new MMALPortConfig(MMALEncoding.JPEG, MMALEncoding.I420, 90);
+                var portConfig = new MMALPortConfig(MMALEncoding.JPEG, MMALEncoding.I420, quality: 90);
 
                 // Create our component pipeline.         
                 imgEncoder.ConfigureOutputPort(portConfig, myCaptureHandler);
 
-                splitter.Outputs[0].ConnectTo(imgEncoder);
                 cam.Camera.VideoPort.ConnectTo(splitter);
+                splitter.Outputs[0].ConnectTo(imgEncoder);
                 cam.Camera.PreviewPort.ConnectTo(nullSink);
 
+                // Camera warm up time
                 await Task.Delay(2000);
 
-                CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(15));
+                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(15));
 
                 // Process images for 15 seconds.        
                 await cam.ProcessAsync(cam.Camera.VideoPort, cts.Token);

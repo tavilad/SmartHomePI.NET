@@ -9,23 +9,24 @@ namespace SmartHomePI.NET.API.Helpers
 {
 public class PushStreamResult: IActionResult
 {
-    private readonly Func<Stream, Task> _onStreamAvailabe;
+    private readonly Action<Stream> _onStreamAvailabe;
     private readonly string _contentType;
 
-    public PushStreamResult(Func<Stream, Task> onStreamAvailabe, string contentType)
+    public PushStreamResult(Action<Stream> onStreamAvailabe, string contentType)
     {
         _onStreamAvailabe = onStreamAvailabe;
         _contentType = contentType;
     }
 
-    public async Task ExecuteResultAsync(ActionContext context)
+    public Task ExecuteResultAsync(ActionContext context)
     {
         var stream = context.HttpContext.Response.Body;
         context.HttpContext.Response.Headers.Add("Age","0");
         context.HttpContext.Response.Headers.Add("Cache-Control","no-cache, private");
         context.HttpContext.Response.Headers.Add("Pragma", "no-cache");
         context.HttpContext.Response.Headers.Add("ContentType",_contentType);
-        await _onStreamAvailabe(stream);
+        _onStreamAvailabe(stream);
+        return Task.CompletedTask;
     }
 }
 }

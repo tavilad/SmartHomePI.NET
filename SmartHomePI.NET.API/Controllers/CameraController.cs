@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -24,47 +25,48 @@ namespace SmartHomePI.NET.API.Controllers
     {
         private Bitmap frame = null;
         private MMALCamera cam;
-        bool saveOnce = true;
+        private bool frameAvailable = false;
+        private string BOUNDARY = "frame";
 
         public CameraController()
         {
             cam = MMALCamera.Instance;
             MMALCameraConfig.VideoResolution = new Resolution(800, 600);
             cam.ConfigureCameraSettings();
-            this.ChangeVideoEncodingType().GetAwaiter().GetResult();
+            //this.ChangeVideoEncodingType().GetAwaiter().GetResult();
         }
 
         [HttpGet("stream")]
         public IActionResult Stream()
         {
-            return new PushStreamResult(OnStreamAvailableAsync, "multipart/x-mixed-replace; boundary=frame");    
+            this.ChangeVideoEncodingType();
+            return new PushStreamResult(OnStreamAvailableAsync, "multipart/x-mixed-replace; boundary=frame");
         }
 
-        private async Task OnStreamAvailableAsync(Stream stream)
+        private void OnStreamAvailableAsync(Stream stream)
         {
             StreamWriter writer = new StreamWriter(stream);
             while (true)
             {
+                // prepare image data
+                byte[] imageData = null;
+
+                // this is to make sure memory stream is disposed after using
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    ms.SetLength(0);
-
-                    if (this.frame == null)
-                    {
-                        continue;
-                    }
-
-                    this.frame.Save(ms, ImageFormat.Jpeg);
-                    byte[] buffer = ms.GetBuffer();
-
-                    await writer.WriteLineAsync("--frame");
-                    await writer.WriteLineAsync("Content-Type: image/jpeg");
-                    await writer.WriteLineAsync(string.Format("Content-length: {0}", buffer.Length));
-                    await writer.WriteLineAsync();
-                    await writer.WriteAsync(Encoding.Unicode.GetString(buffer, 0, buffer.Length));
-
-                    await writer.FlushAsync();
+                    frame.Save(ms, ImageFormat.Jpeg);
+                    imageData = ms.ToArray();
                 }
+
+                // prepare header
+                byte[] header = CreateHeader(imageData.Length);
+                // prepare footer
+                byte[] footer = CreateFooter();
+
+                // Start writing data
+                stream.Write(header, 0, header.Length);
+                stream.Write(imageData, 0, imageData.Length);
+                stream.Write(footer, 0, footer.Length);
             }
         }
         protected virtual void OnEmguEventCallback(object sender, EmguEventArgs args)
@@ -111,7 +113,103 @@ namespace SmartHomePI.NET.API.Controllers
                 // Process images for 15 seconds.        
                 await cam.ProcessAsync(cam.Camera.VideoPort, cts.Token);
             }
+
         }
+
+        // [HttpGet("stream2")]
+        // public HttpResponseMessage GetVideoContent()
+        // {
+        //     mjpegStream.Start();
+        //     var response = Request.CreateResponse();
+        //     response.Content = new PushStreamContent((Action<Stream, HttpContent, TransportContext>)StartStream);
+        //     response.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("multipart/x-mixed-replace; boundary=" + BOUNDARY);
+        //     return response;
+        // }
+
+        /// <summary>
+        /// Craete an appropriate header.
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        private byte[] CreateHeader(int length)
+        {
+            string header =
+                "--" + BOUNDARY + "\r\n" +
+                "Content-Type:image/jpeg\r\n" +
+                "Content-Length:" + length + "\r\n\r\n";
+
+            return Encoding.ASCII.GetBytes(header);
+        }
+
+        public byte[] CreateFooter()
+        {
+            return Encoding.ASCII.GetBytes("\r\n");
+        }
+
+        /// <summary>
+        /// Write the given frame to the stream
+        /// </summary>
+        /// <param name="stream">Stream</param>
+        /// <param name="frame">Bitmap format frame</param>
+        private void WriteFrame(Stream stream, Bitmap frame)
+        {
+            // prepare image data
+            byte[] imageData = null;
+
+            // this is to make sure memory stream is disposed after using
+            using (MemoryStream ms = new MemoryStream())
+            {
+                frame.Save(ms, ImageFormat.Jpeg);
+                imageData = ms.ToArray();
+            }
+
+            // prepare header
+            byte[] header = CreateHeader(imageData.Length);
+            // prepare footer
+            byte[] footer = CreateFooter();
+
+            // Start writing data
+            stream.Write(header, 0, header.Length);
+            stream.Write(imageData, 0, imageData.Length);
+            stream.Write(footer, 0, footer.Length);
+        }
+
+        /// <summary>
+        /// While the MJPEGStream is running and clients are connected,
+        /// continue sending frames.
+        /// </summary>
+        /// <param name="stream">Stream to write to.</param>
+        /// <param name="httpContent">The content information</param>
+        /// <param name="transportContext"></param>
+        // private void StartStream(Stream stream, HttpContent httpContent, TransportContext transportContext)
+        // {
+        //     while (mjpegStream.IsRunning && HttpContext.Current.Response.IsClientConnected)
+        //     {
+        //         if (frameAvailable)
+        //         {
+        //             try
+        //             {
+        //                 WriteFrame(stream, frame);
+        //                 frameAvailable = false;
+        //             }
+        //             catch (Exception e)
+        //             {
+        //                 System.Diagnostics.Debug.WriteLine(e);
+        //             }
+        //         }
+        //         else
+        //         {
+        //             Thread.Sleep(30);
+        //         }
+        //     }
+        //     stopStream();
+        // }
+
+        // private void stopStream()
+        // {
+        //     System.Diagnostics.Debug.WriteLine("Stop stream");
+        //     mjpegStream.Stop();
+        // }
 
         public class EmguEventArgs : EventArgs
         {

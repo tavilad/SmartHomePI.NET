@@ -7,7 +7,7 @@
       <mat-card-header>
         <mat-card-title>{{tile.text}}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image src="http://192.168.0.137:8000/stream.mjpg">
+      <img mat-card-image src="http://raspberrypi:8080/api/camera/Stream">
       <mat-card-actions>
         <button mat-raised-button color="primary" class="mr-2" [routerLink]="['/roompage',tiles.indexOf(tile)]">Open Room</button>
         <button mat-raised-button color="primary" (click)="removeRoom(tile.text)">Remove Room</button>

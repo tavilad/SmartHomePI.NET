@@ -55,7 +55,7 @@ namespace SmartHomePI.NET.API.Controllers
                 {
                     continue;
                 }
-                
+
                 // this is to make sure memory stream is disposed after using
                 using (MemoryStream ms = new MemoryStream())
                 {
@@ -72,6 +72,7 @@ namespace SmartHomePI.NET.API.Controllers
                 stream.Write(header, 0, header.Length);
                 stream.Write(imageData, 0, imageData.Length);
                 stream.Write(footer, 0, footer.Length);
+                stream.Flush();
             }
         }
         protected virtual void OnEmguEventCallback(object sender, EmguEventArgs args)

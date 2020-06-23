@@ -24,8 +24,6 @@ export class RoompageComponent implements OnInit {
   ngOnInit(): void {
     this.roomIndex = this.activatedRoute.snapshot.paramMap.get('id');
 
-    console.log(this.roomIndex);
-
     this.crudService.getForUserId(parseInt(this.authService.decodedToken.nameid), 'room')
       .subscribe((rooms) => {
         // tslint:disable-next-line: no-string-literal

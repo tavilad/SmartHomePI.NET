@@ -34,7 +34,7 @@ namespace SmartHomePI.NET.API.Controllers
             this.mailService = mailService;
         }
 
-        [HttpGet]
+        [HttpGet("{roomId}")]
         public async Task<IActionResult> GetTemperature(int roomId)
         {
             if (devEnv)

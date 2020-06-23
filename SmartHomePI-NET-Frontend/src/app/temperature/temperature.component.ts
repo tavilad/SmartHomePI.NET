@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
+import { Component, OnInit, HostBinding, ViewChild, Input } from '@angular/core';
 import { fadeInAnimation } from '../_animations/index';
 import { HttpClient } from '@angular/common/http';
 import { Observable, interval } from 'rxjs';
@@ -15,6 +15,8 @@ export class TemperatureComponent implements OnInit {
   baseUrl = 'http://raspberrypi:8080/api/temperature/';
 
   reading: any = {};
+
+  @Input()
   roomId: any;
 
   isChartPaused: boolean;

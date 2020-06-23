@@ -1,6 +1,6 @@
 <div class="row h-100 justify-content-center align-items-center">
   <h1>Room {{ selectedRoom.roomName }}</h1>
-  <h1>Room id {{ selectedRoom.roomId }}</h1>
+  <h1>Room id {{ selectedRoom.id }}</h1>
 </div>
 
 <div class="row h-100 justify-content-center align-items-center">
@@ -15,4 +15,4 @@
   </mat-slide-toggle>
 </div>
 
-<app-temperature></app-temperature>
+<app-temperature [roomId] = 'selectedRoom.id'></app-temperature>

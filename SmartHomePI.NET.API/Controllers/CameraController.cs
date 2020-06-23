@@ -51,6 +51,11 @@ namespace SmartHomePI.NET.API.Controllers
                 // prepare image data
                 byte[] imageData = null;
 
+                if(this.frame == null)
+                {
+                    continue;
+                }
+                
                 // this is to make sure memory stream is disposed after using
                 using (MemoryStream ms = new MemoryStream())
                 {

@@ -24,6 +24,7 @@ namespace SmartHomePI.NET.API.Controllers
         private Bitmap frame = null;
         private MMALCamera cam;
         bool saveOnce = true;
+
         public CameraController()
         {
             cam = MMALCamera.Instance;
@@ -32,7 +33,7 @@ namespace SmartHomePI.NET.API.Controllers
             this.ChangeVideoEncodingType().GetAwaiter().GetResult();
         }
 
-        [HttpGet]
+        [HttpGet("stream")]
         public IActionResult Stream()
         {
             var response = new HttpResponseMessage();

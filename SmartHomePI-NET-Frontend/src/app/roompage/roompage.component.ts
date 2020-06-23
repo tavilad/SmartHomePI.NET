@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { CrudService } from '../_services/CRUD.service';
 import { AuthService } from '../_services/auth.service';
+import { RaspberryPiServiceService } from '../_services/RaspberryPiService.service';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-roompage',
@@ -12,7 +14,8 @@ import { AuthService } from '../_services/auth.service';
 })
 export class RoompageComponent implements OnInit {
 
-  constructor(public activatedRoute: ActivatedRoute, public crudService: CrudService, public authService: AuthService) { }
+  constructor(public activatedRoute: ActivatedRoute, public crudService: CrudService, public authService: AuthService,
+              public raspberryService: RaspberryPiServiceService, public alertifyService: AlertifyService) { }
 
   public roomIndex: string;
 
@@ -30,21 +33,28 @@ export class RoompageComponent implements OnInit {
         this.rooms = rooms['roomList'];
         console.log(this.rooms);
         this.selectedRoom = this.rooms[this.roomIndex];
+        this.raspberryService.baseUrl = this.selectedRoom.ipAddress;
+        console.log(this.raspberryService.baseUrl);
       });
   }
 
   getReport() {
-    this.crudService.getReport(this.authService.decodedToken.unique_name, this.selectedRoom.roomName)
-      .subscribe(() => console.log('sent report'));
+    this.raspberryService.getReport(this.authService.decodedToken.unique_name, this.selectedRoom.roomName)
+      .subscribe(() => {console.log('sent report'); }, error => {
+        this.alertifyService.error(error);
+      });
   }
 
   controlLight(e) {
     if (!this.lightOn) {
-      this.crudService.turnOnLight().subscribe(() => console.log('on'));
-
+      this.raspberryService.turnOnLight().subscribe(() => {console.log('on'); }, error => {
+        this.alertifyService.error(error);
+      });
       this.lightOn = true;
     } else {
-      this.crudService.turnOffLight().subscribe(() => console.log('off'));
+      this.raspberryService.turnOffLight().subscribe(() => {console.log('on'); }, error => {
+        this.alertifyService.error(error);
+      });
       this.lightOn = false;
     }
   }

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, interval } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import 'chartjs-plugin-streaming';
+import { RaspberryPiServiceService } from '../_services/RaspberryPiService.service';
 
 @Component({
   selector: 'app-temperature',
@@ -12,8 +13,6 @@ import 'chartjs-plugin-streaming';
 })
 
 export class TemperatureComponent implements OnInit {
-  baseUrl = 'http://raspberrypi:8080/api/temperature/';
-
   reading: any = {};
 
   @Input()
@@ -33,7 +32,7 @@ export class TemperatureComponent implements OnInit {
         frameRate: 30,
         refresh: 2000,
         onRefresh: function (chart: any) {
-          this.http.get(this.baseUrl + this.roomId).subscribe((reading) => {
+          this.http.get(this.raspberryService.baseUrl + 'temperature/' + this.roomId).subscribe((reading) => {
             chart.data.datasets[0].data.push({ x: Date.now(), y: reading.temperature });
             chart.data.datasets[1].data.push({ x: Date.now(), y: reading.humidity });
           }
@@ -44,7 +43,7 @@ export class TemperatureComponent implements OnInit {
     tooltips: { mode: 'nearest', intersect: false }, hover: { mode: 'nearest', intersect: false },
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public raspberryService: RaspberryPiServiceService) { }
 
   ngOnInit() {
   }

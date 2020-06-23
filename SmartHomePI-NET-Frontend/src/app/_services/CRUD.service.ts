@@ -38,17 +38,4 @@ export class CrudService {
   deleteByName(roomName: string, userId: any, tableName: string) {
     return this.http.delete(this.baseUrl + tableName  + '/DeleteByName/' + roomName + '/' + userId);
   }
-
-  getReport(user: string, room: string) {
-    return this.http.get(this.baseUrl + 'temperature/Report/' + user + '/' + room);
-  }
-
-  turnOnLight() {
-    return this.http.get('http://raspberrypi:8080/api/light/lighton');
-  }
-
-  turnOffLight() {
-    return this.http.get('http://raspberrypi:8080/api/light/lightoff');
-  }
-
 }

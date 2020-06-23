@@ -51,12 +51,12 @@ export class DashboardComponent implements OnInit {
         console.log(result);
         // tslint:disable-next-line: radix
         this.model.userId = parseInt(this.authService.decodedToken.nameid);
-        this.model.roomName = result;
-        this.model.IpAddress = this.ipAddress;
+        this.model.roomName = result.roomName;
+        this.model.IpAddress = result.ipAddress;
         console.log(this.model);
         this.crudService.create(this.model, 'room').subscribe(() => {
           this.alertify.success('Created room ' + this.model.roomName);
-          this.initRooms();
+          this.tiles.push({text: this.model.roomName, cols: 1, rows: 1 , border: '', roomId: this.model.id});
         }, error => {
           this.alertify.error(error);
         });

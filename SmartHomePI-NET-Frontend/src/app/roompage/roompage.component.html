@@ -1,6 +1,5 @@
 <div class="row h-100 justify-content-center align-items-center">
   <h1>Room {{ selectedRoom.roomName }}</h1>
-  <h1>Room id {{ selectedRoom.id }}</h1>
 </div>
 
 <div class="row h-100 justify-content-center align-items-center">
@@ -11,7 +10,13 @@
 
 <div class="row h-100 justify-content-center align-items-center">
   <h1>Control the lights</h1>
-  <mat-slide-toggle (change)="controlLight($event)" [checked]="lightOn">
+  <mat-slide-toggle (change)="controlLight()" [checked]="lightOn">
+  </mat-slide-toggle>
+</div>
+
+<div class="row h-100 justify-content-center align-items-center">
+  <h1>Distance sensor active</h1>
+  <mat-slide-toggle (change)="controlDistanceSensor()" [checked]="distanceSensorOn">
   </mat-slide-toggle>
 </div>
 

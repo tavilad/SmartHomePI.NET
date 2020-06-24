@@ -32,7 +32,7 @@ export class TemperatureComponent implements OnInit {
         frameRate: 30,
         refresh: 2000,
         onRefresh: function (chart: any) {
-          this.http.get(this.raspberryService.baseUrl + 'temperature/' + this.roomId).subscribe((reading) => {
+          this.http.get(this.raspberryService.baseUrl + '/api/temperature/' + this.roomId).subscribe((reading) => {
             chart.data.datasets[0].data.push({ x: Date.now(), y: reading.temperature });
             chart.data.datasets[1].data.push({ x: Date.now(), y: reading.humidity });
           }

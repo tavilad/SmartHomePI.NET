@@ -22,4 +22,8 @@ export class RaspberryPiServiceService {
     return this.http.get(this.baseUrl + '/api/light/lightoff');
   }
 
+  getDistance() {
+    return this.http.get(this.baseUrl + '/api/distance/get');
+  }
+
 }

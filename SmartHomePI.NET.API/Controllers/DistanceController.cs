@@ -10,8 +10,7 @@ namespace SmartHomePI.NET.API.Controllers
         private const int ECHO = 18;
         private const int TRIG = 16;
 
-
-        [HttpGet]
+        [HttpGet("get")]
         public IActionResult GetDistance()
         {
             using (var sonar = new Hcsr04(TRIG, ECHO))

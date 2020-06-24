@@ -75,7 +75,6 @@ export class DashboardComponent implements OnInit {
         this.rooms.forEach((room) => {
           this.tiles.push({ text: room.roomName, cols: 1, rows: 1, border: '', roomId: this.model.id });
         });
-        interval(1).subscribe(() => this.update());
       });
   }
 

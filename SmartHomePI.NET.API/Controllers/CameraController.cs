@@ -92,7 +92,7 @@ namespace SmartHomePI.NET.API.Controllers
 
             using (var myCaptureHandler = new EmguInMemoryCaptureHandler())
             using (var splitter = new MMALSplitterComponent())
-            using (var imgEncoder = new MMALImageEncoder(continuousCapture: true))
+            using (var vidEncoder = new MMALVideoEncoder())
             using (var nullSink = new MMALNullSinkComponent())
             {
                 cam.ConfigureCameraSettings();
@@ -104,10 +104,10 @@ namespace SmartHomePI.NET.API.Controllers
                 var portConfig = new MMALPortConfig(MMALEncoding.MJPEG, MMALEncoding.I420, quality: 90);
 
                 // Create our component pipeline.        
-                imgEncoder.ConfigureOutputPort(portConfig, myCaptureHandler);
+                vidEncoder.ConfigureOutputPort(portConfig, myCaptureHandler);
 
                 cam.Camera.VideoPort.ConnectTo(splitter);
-                splitter.Outputs[0].ConnectTo(imgEncoder);
+                splitter.Outputs[0].ConnectTo(vidEncoder);
                 cam.Camera.PreviewPort.ConnectTo(nullSink);
 
                 // Camera warm up time

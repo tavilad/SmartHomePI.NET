@@ -44,7 +44,6 @@ namespace SmartHomePI.NET.API.Controllers
 
         private void OnStreamAvailableAsync(Stream stream)
         {
-            StreamWriter writer = new StreamWriter(stream);
             while (true)
             {
                 // prepare image data
@@ -71,6 +70,7 @@ namespace SmartHomePI.NET.API.Controllers
                 stream.Write(header, 0, header.Length);
                 stream.Write(imageData, 0, imageData.Length);
                 stream.Write(footer, 0, footer.Length);
+
                 stream.Flush();
             }
         }
@@ -98,8 +98,6 @@ namespace SmartHomePI.NET.API.Controllers
                 cam.ConfigureCameraSettings();
 
                 myCaptureHandler.MyEmguEvent += OnEmguEventCallback;
-
-                splitter.ConfigureInputPort( new MMALPortConfig(MMALEncoding.OPAQUE, MMALEncoding.I420), cam.Camera.VideoPort, null);
 
                 var portConfig = new MMALPortConfig(MMALEncoding.MJPEG, MMALEncoding.I420, quality: 90);
 
@@ -177,6 +175,7 @@ namespace SmartHomePI.NET.API.Controllers
             stream.Write(header, 0, header.Length);
             stream.Write(imageData, 0, imageData.Length);
             stream.Write(footer, 0, footer.Length);
+
         }
 
         public class EmguEventArgs : EventArgs

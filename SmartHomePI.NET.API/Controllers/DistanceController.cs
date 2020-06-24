@@ -11,8 +11,8 @@ namespace SmartHomePI.NET.API.Controllers
     [ApiController]
     public class DistanceController : ControllerBase
     {
-        private const int ECHO = 18;
-        private const int TRIG = 16;
+        private const int ECHO = 24;
+        private const int TRIG = 23;
         private GpioController controller;
 
         public DistanceController()

@@ -33,13 +33,12 @@ namespace SmartHomePI.NET.API.Controllers
             cam = MMALCamera.Instance;
             MMALCameraConfig.VideoResolution = new Resolution(800, 600);
             cam.ConfigureCameraSettings();
-            //this.ChangeVideoEncodingType().GetAwaiter().GetResult();
+            this.ChangeVideoEncodingType().GetAwaiter().GetResult();
         }
 
         [HttpGet("stream")]
         public IActionResult Stream()
         {
-            this.ChangeVideoEncodingType();
             return new PushStreamResult(OnStreamAvailableAsync, "multipart/x-mixed-replace; boundary=frame");
         }
 
@@ -114,7 +113,7 @@ namespace SmartHomePI.NET.API.Controllers
                 // Camera warm up time
                 await Task.Delay(2000);
 
-                var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(1));
+                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(15));
 
                 // Process images for 15 seconds.        
                 await cam.ProcessAsync(cam.Camera.VideoPort, cts.Token);

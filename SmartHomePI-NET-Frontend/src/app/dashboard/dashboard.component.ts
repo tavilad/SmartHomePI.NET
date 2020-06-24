@@ -34,15 +34,11 @@ export class DashboardComponent implements OnInit {
   rooms: Observable<any>;
 
   constructor(public dialog: MatDialog, private alertify: AlertifyService,
-    private crudService: CrudService, private authService: AuthService) {
+              private crudService: CrudService, private authService: AuthService) {
   }
 
   ngOnInit() {
     this.initRooms();
-  }
-
-  public getLinkPicture() {
-    return 'http://raspberrypi:8080/api/camera/Stream' + '?' + new Date().getTime();
   }
 
   openDialog() {

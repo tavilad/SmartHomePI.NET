@@ -5,20 +5,21 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class RaspberryPiServiceService {
-  public baseUrl: string = 'http://raspberrypi:8080/api/';
+  public baseUrl: string = 'http://raspberrypi:8080';
+  public cameraUrl: string = this.baseUrl + '/stream.mjpeg/';
 
   constructor(private http: HttpClient) { }
 
   getReport(user: string, room: string) {
-    return this.http.get(this.baseUrl + 'temperature/Report/' + user + '/' + room);
+    return this.http.get(this.baseUrl + '/api/temperature/Report/' + user + '/' + room);
   }
 
   turnOnLight() {
-    return this.http.get(this.baseUrl + 'light/lighton');
+    return this.http.get(this.baseUrl + '/api/light/lighton');
   }
 
   turnOffLight() {
-    return this.http.get(this.baseUrl + 'light/lightoff');
+    return this.http.get(this.baseUrl + '/api/light/lightoff');
   }
 
 }

@@ -72,12 +72,11 @@ namespace SmartHomePI.NET.API.Controllers
                 stream.Write(imageData, 0, imageData.Length);
                 stream.Write(footer, 0, footer.Length);
                 stream.Flush();
+                Console.WriteLine("Sent frame");
             }
         }
         protected virtual void OnEmguEventCallback(object sender, EmguEventArgs args)
         {
-            Console.WriteLine("I'm in OnEmguEventCallback.");
-
             using (var ms = new MemoryStream(args.ImageData))
             {
                 this.frame = new Bitmap(ms);
@@ -197,7 +196,6 @@ namespace SmartHomePI.NET.API.Controllers
                 // stored in the "WorkingData" property plus the data found in the "data" parameter indicates you have a full image frame.
 
                 // I suspect in here, you will want to have a separate thread which is responsible for sending data to EmguCV for processing?
-                Console.WriteLine("I'm in here");
 
                 base.Process(context);
 

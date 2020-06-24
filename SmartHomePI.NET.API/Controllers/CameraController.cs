@@ -39,11 +39,13 @@ namespace SmartHomePI.NET.API.Controllers
         [HttpGet("stream")]
         public IActionResult Stream()
         {
-            return new PushStreamResult(OnStreamAvailableAsync, "multipart/x-mixed-replace; boundary=frame");
+            return new PushStreamResult(OnStreamAvailableAsync,HttpContext.RequestAborted, "multipart/x-mixed-replace; boundary=frame");
         }
 
-        private void OnStreamAvailableAsync(Stream stream)
+        private void OnStreamAvailableAsync(Stream stream,CancellationToken requestAborted)
         {
+            var wait = requestAborted.WaitHandle;
+            wait.WaitOne();
             while (true)
             {
                 // prepare image data

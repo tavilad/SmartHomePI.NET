@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { AlertifyService } from '../_services/alertify.service';
 import { CrudService } from '../_services/CRUD.service';
 import { AuthService } from '../_services/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, interval } from 'rxjs';
 
 export interface Tile {
   cols: number;
@@ -34,12 +34,13 @@ export class DashboardComponent implements OnInit {
   rooms: Observable<any>;
 
   constructor(public dialog: MatDialog, private alertify: AlertifyService,
-              private crudService: CrudService, private authService: AuthService) {
+    private crudService: CrudService, private authService: AuthService) {
   }
 
   ngOnInit() {
     this.initRooms();
   }
+
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -74,6 +75,7 @@ export class DashboardComponent implements OnInit {
         this.rooms.forEach((room) => {
           this.tiles.push({ text: room.roomName, cols: 1, rows: 1, border: '', roomId: this.model.id });
         });
+        interval(1).subscribe(() => this.update());
       });
   }
 

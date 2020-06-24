@@ -72,7 +72,6 @@ namespace SmartHomePI.NET.API.Controllers
                 stream.Write(imageData, 0, imageData.Length);
                 stream.Write(footer, 0, footer.Length);
                 stream.Flush();
-                Console.WriteLine("Sent frame");
             }
         }
         protected virtual void OnEmguEventCallback(object sender, EmguEventArgs args)
@@ -100,9 +99,11 @@ namespace SmartHomePI.NET.API.Controllers
 
                 myCaptureHandler.MyEmguEvent += OnEmguEventCallback;
 
-                var portConfig = new MMALPortConfig(MMALEncoding.JPEG, MMALEncoding.I420, quality: 90);
+                splitter.ConfigureInputPort( new MMALPortConfig(MMALEncoding.OPAQUE, MMALEncoding.I420), cam.Camera.VideoPort, null);
 
-                // Create our component pipeline.         
+                var portConfig = new MMALPortConfig(MMALEncoding.MJPEG, MMALEncoding.I420, quality: 90);
+
+                // Create our component pipeline.        
                 imgEncoder.ConfigureOutputPort(portConfig, myCaptureHandler);
 
                 cam.Camera.VideoPort.ConnectTo(splitter);

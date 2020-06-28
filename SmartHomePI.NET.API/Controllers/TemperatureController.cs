@@ -54,11 +54,24 @@ namespace SmartHomePI.NET.API.Controllers
                 }
                 else
                 {
-                    return Ok(new
+                    IEnumerable<TemperatureAndHumidity> temps = await this.repository.Get(temp => temp.RoomId == roomId);
+                    if (temps.FirstOrDefault() != null)
                     {
-                        temperature = "",
-                        humidity = ""
-                    });
+                        return Ok(new
+                        {
+                            temperature = temps.FirstOrDefault().Temperature,
+                            humidity = temps.FirstOrDefault().Humidity
+                        });
+                    }
+                    else
+                    {
+                        return Ok(new
+                        {
+                            temperature = "",
+                            humidity = ""
+                        });
+                    }
+
                 }
             }
         }

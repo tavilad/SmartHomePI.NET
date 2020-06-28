@@ -16,13 +16,7 @@ namespace SmartHomePI.NET.API.Controllers
     [ApiController]
     public class TemperatureController : ControllerBase
     {
-        private const int PIN = 4;
-        private bool devEnv = true;
-        private const double maxWeather = 24.0;
-        private const double minWeather = 25.0;
-        private const double maxHumidity = 65.0;
-        private const double minHumidity = 70.0;
-
+        private const int PIN = 12;
         private readonly ITemperatureAndHumidityRepository repository;
         private readonly DataContext context;
         private IMailService mailService;
@@ -37,26 +31,6 @@ namespace SmartHomePI.NET.API.Controllers
         [HttpGet("{roomId}")]
         public async Task<IActionResult> GetTemperature(int roomId)
         {
-            if (devEnv)
-            {
-                Random random = new Random();
-                double temperature = (random.NextDouble() * (maxWeather - minWeather) + minWeather);
-                double humidity = (random.NextDouble() * (maxHumidity - minHumidity) + minHumidity);
-                await this.repository.Insert(new TemperatureAndHumidity()
-                {
-                    Temperature = temperature,
-                    Humidity = humidity,
-                    DayOfReading = DateTime.Today,
-                    RoomId = roomId
-                });
-
-                return Ok(new
-                {
-                    temperature = temperature.ToString(),
-                    humidity = humidity.ToString()
-                });
-            }
-
             using (Dht11 dht = new Dht11(PIN))
             {
                 Temperature temperature = dht.Temperature;
